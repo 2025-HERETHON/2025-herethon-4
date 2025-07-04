@@ -17,12 +17,12 @@ body {
 
 .container {
     width: 390px;
-    height: 100vh;
+    height: 844px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--background);
 }
 
 ::-webkit-scrollbar {
