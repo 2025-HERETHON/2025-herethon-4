@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>추천 장소 리스트</title>
+</head>
+<body>
+    <h1>추천 장소 목록</h1>
+    <ul>
+        {% for place in places %}
+            <li>
+                <strong>{{ place.name }}</strong> - {{ place.description }}
+            </li>
+        {% empty %}
+            <li>추천 장소가 없습니다.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
