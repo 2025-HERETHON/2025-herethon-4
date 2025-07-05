@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 페이지</title>
+</head>
+<body>
+    <h1>회원가입</h1>
+
+    <form class="user" method="POST">
+        {% csrf_token %}
+
+        <!-- 이메일 -->
+        <div>
+            <input type="email"
+                   name="email"
+                   placeholder="이메일을 입력하세요"
+                   required>
+        </div>
+
+        <!-- 비밀번호 -->
+        <div>
+            <input type="password"
+                   name="password"
+                   placeholder="비밀번호를 입력하세요"
+                   required>
+        </div>
+
+        <!-- 이름 -->
+        <div>
+            <input type="text"
+                   name="name"
+                   placeholder="이름을 입력하세요"
+                   required>
+        </div>
+
+        <!-- 성별(여성) 체크박스 — 필수 -->
+        <div>
+            <label>
+                <input type="checkbox"
+                       name="is_female"
+                       required>
+                저는 여성입니다
+            </label>
+        </div>
+
+        <input type="submit" value="가입하기">
+    </form>
+</body>
+</html>
