@@ -7,10 +7,14 @@
 </head>
 <body>
     <h2>리뷰 수정</h2>
-    <form method="POST" action="{% url 'places:update_review' review.id %}">
+    <form method="POST" action="{% url 'places:update_review' review.id %}" enctype="multipart/form-data">
         {% csrf_token %}
         평점 - <input type="number" value="{{ review.rating }}" name="rating" min="1" max="5" step="1" required><br>
         내용 - <textarea name="comment" cols="30" rows="5">{{ review.comment }}</textarea><br>
+        {% if post.image %}
+            기존 이미지 : <img width="320" height="240" src="{{ review.image.url }}"><br><br>
+        {% endif %}
+        이미지 변경 - <input type="file" name="image"><br><br>
         <button type="submit">수정하기</button>
     </form>
 </body>

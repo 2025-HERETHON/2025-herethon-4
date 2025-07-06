@@ -1,20 +1,19 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
-from django.db.models import Avg
+from django.db.models import Avg, Q
 from .models import *
 
 @login_required
 def main(request):
     user = request.user
-    profile = user.profile
+    profile = user.userprofile
 
     places = (
         Place.objects
         .filter(
-            mood=profile.mood,
-            activity=profile.activity,
-            region=profile.region
+        emotion=profile.emotion,         
+        activity_level=profile.activity_level,
+        region=profile.region
         )
         .annotate(avg_rating=Avg('reviews__rating'))
         .order_by('-avg_rating')[:5]
@@ -33,21 +32,19 @@ def main(request):
 @login_required
 def recommend_places(request):
     user = request.user
-    profile = user.profile
+    profile = user.userprofile
     category = request.GET.get('category')
 
     recommended_places = (
         Place.objects
         .filter(
-            mood=profile.mood,
-            activity=profile.activity,
-            region=profile.region
+        emotion=profile.emotion,         
+        activity_level=profile.activity_level,
+        region=profile.region
         )
     )
     if category and category != "전체":
         recommended_places = recommended_places.filter(category=category)
-
-    recommended_places = recommended_places.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating')
 
     return render(request, 'places/recommend_places.html', {
         'recommended_places': recommended_places,
@@ -58,7 +55,7 @@ def recommend_places(request):
 @login_required
 def detail_place(request, id):
     place = get_object_or_404(Place, id=id)
-    reviews = Review.objects.filter(place=place).order_by('-created_at')
+    reviews = Review.objects.filter(place=place, user=request.user).order_by('-created_at')
 
     return render(request, 'places/detail_place.html', {'place': place, 'reviews': reviews})
 
@@ -70,12 +67,14 @@ def create_review(request, id):
     if request.method == 'POST':
         rating = request.POST.get('rating')
         comment = request.POST.get('comment')
+        image = request.FILES.get('image')
 
         Review.objects.create(
             user=request.user,
             place=place,
             rating=rating,
-            comment=comment
+            comment=comment,
+            image = image
         )
 
         return redirect('places:detail_place', id=id)
@@ -88,6 +87,12 @@ def update_review(request, id):
     if request.method == 'POST':
         review.rating = request.POST.get('rating')
         review.comment = request.POST.get('comment')
+        image = request.FILES.get('image')
+
+        if image:
+            review.image.delete()
+            review.image = image
+        
         review.save()
         return redirect('places:detail_place', review.place.id)
     

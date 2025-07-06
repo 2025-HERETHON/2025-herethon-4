@@ -6,9 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>{{ request.user.profile.name }}님 안녕하세요!</h1>
+    <h1>{{ request.user.first_name }}님 안녕하세요!</h1>
     <p>오늘은 어떤 여정을 떠나볼까요?</p>
-    <a href="">+ 새로운 여정 시작하기</a>
+    <a href="{% url 'places:recommend_places' %}">+ 새로운 여정 시작하기</a>
 
     <hr>
 
@@ -16,8 +16,8 @@
     <a href="{% url 'places:recommend_places' %}">더보기→</a>
     {% for place in places %}
         <div>
-            <h3><a href="{% url 'places:detail_place' place.id %}">{{ place.name }}</a></h3>
-            <p>{{ place.category }}</p>
+            <h3><a href="{% url 'places:detail_place' place.id %}">{{ place.emoji }} {{ place.name }}</a></h3>
+            <p>{{ place.get_category_display }} | {{ place.tags }}</p>
         </div>
     {% empty %}
         <p>추천 장소가 없어요.</p>
@@ -29,8 +29,8 @@
     {% for review in reviews %}
         <h3>{{ review.place.name }}</h3>
         <p>{{ review.created_at|timesince }} 전</p>
-        <p>{{ review.place.region }}</p>
-        <p> ⭐{{ review.rating |floatformat:1 }} {{ review.comment }}</p>
+        <p>{{ review.place.get_region_display }}</p>
+        <p> ⭐{{ review.rating|floatformat:1 }} {{ review.comment }}</p>
     {% empty %}
         <p>방문 기록이 없어요.</p>
     {% endfor %}
@@ -38,8 +38,8 @@
     <br><br>
 
     홈 
-    <a href ="{% url 'places:recommend_places' %}">탐험 </a>
-    <a href ="">여정 </a>
-    <a href ="{% url 'accounts:mypage' %}">마이 </a>
+    <a href="{% url 'places:recommend_places' %}">탐험 </a>
+    <a href="">여정 </a>
+    <a href="{% url 'accounts:mypage' %}">마이 </a>
 </body>
 </html>
