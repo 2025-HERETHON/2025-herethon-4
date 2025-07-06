@@ -102,7 +102,7 @@ form {
   line-height: 48px;
 }
 
-#state {
+.state {
   color: #353e4b;
   font-family: Pretendard;
   font-size: 17px;
@@ -112,7 +112,7 @@ form {
   margin-bottom: 5px;
 }
 
-#descript {
+.descript {
   color: #5d6673;
   font-family: Pretendard;
   font-size: 16px;
