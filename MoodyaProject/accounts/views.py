@@ -3,7 +3,11 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 import uuid  
-
+from django.contrib.auth.decorators import login_required
+from .forms import EmotionForm
+from .forms import ActivityLevelForm
+from .forms import RegionForm
+from .models import UserProfile
 # Create your views here.
 
 from django.shortcuts import render, redirect
@@ -71,7 +75,7 @@ def login(request):
         if user is not None:
             auth_login(request, user)
             print('로그인 성공:', user.username)
-            return redirect('home')
+            return redirect('accounts:emotion_setup')
         else:
             return render(request, 'login.html', {
                 'error_message': '이메일 또는 비밀번호가 잘못되었습니다.'
@@ -84,3 +88,47 @@ def logout(request):
     auth_logout(request)
     print('로그아웃 성공')
     return redirect('home')
+
+
+@login_required
+def emotion_setup(request):
+    # 프로필이 없으면 새로 만듦 → 에러 방지용 안전 코드
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = EmotionForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:activity_level_setup')
+    else:
+        form = EmotionForm(instance=profile)
+
+    return render(request, 'accounts/emotion_setup.html', {'form': form})
+
+@login_required
+def activity_level_setup(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = ActivityLevelForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:region_setup')
+    else:
+        form = ActivityLevelForm(instance=profile)
+
+    return render(request, 'accounts/activity_level.html', {'form': form})
+
+@login_required
+def region_setup(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = RegionForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('home') 
+    else:
+        form = RegionForm(instance=profile)
+
+    return render(request, 'accounts/region_setup.html', {'form': form})

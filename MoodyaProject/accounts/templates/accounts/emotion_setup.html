@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>감정 선택</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+      /* 아주 가벼운 데모용 스타일 */
+      body        { font-family: Pretendard, sans-serif; margin: 40px; }
+      h1          { font-size: 1.8rem; margin-bottom: 1rem; }
+      form p      { margin: .4rem 0; }
+      input[type=radio] { margin-right: .4rem; }
+      button      { padding: .4rem 1rem; border-radius: 6px; border: none;
+                    font-weight: 600; cursor: pointer; }
+      button:hover{ background:#eee; }
+    </style>
+</head>
+<body>
+  <h1>{{ form.emotion.label }}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.emotion }}      {# 라디오 그룹 출력 #}
+    <br><br>
+    <button type="submit">저장</button>
+  </form>
+</body>
+</html>

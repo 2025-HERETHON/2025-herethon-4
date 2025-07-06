@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>지역 선택</title>
+</head>
+<body>
+    <h1>오늘, 어디에서 나를 쉬게 해줄까요?</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.region }}
+        <br><br>
+        <button type="submit">다음</button>
+    </form>
+</body>
+</html>

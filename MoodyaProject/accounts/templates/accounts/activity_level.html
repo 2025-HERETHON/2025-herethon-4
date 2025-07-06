@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>혼자 외출 편한 정도 선택</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 1.5rem;
+        }
+        .choice {
+            margin-bottom: 1rem;
+        }
+        .submit-btn {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>혼자 외출이 어느 정도 편하신가요?</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="choice">
+            {{ form.activity_level }}
+        </div>
+        <button type="submit" class="submit-btn">저장</button>
+    </form>
+</body>
+</html>
