@@ -1,15 +1,82 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="../assets/css/style.css">
-   <link rel="stylesheet" href="../assets/css/section/signUp.css" />
-   <title>MOODYA Sign Up</title>
-</head>
-<body>
-   <div id="wrap" class="container">
-      <div>회원가입 페이지입니다.</div>
-   </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/section/signUp.css" />
+    <title>MOODYA Sign Up</title>
+    <!-- 회원가입 페이지입니다. -->
+  </head>
+
+  <body>
+    <div id="wrap" class="container">
+      <div class="box">
+        <!-- 시작페이지로 이동 -->
+        <a href="index.html" id="backBtn">
+          <img src="../assets/images/backBtn.svg" alt="backBtn" id="backBtn" />
+        </a>
+        <div class="intro-ment">
+          <div class="first-intro">
+            <p>MOODYA<span style="color: #353e4b">와 함께해요</span></p>
+          </div>
+          <div class="second-intro">
+            <p>안전하고 특별한 혼자만의 힐링 여정을 시작해보세요</p>
+          </div>
+        </div>
+
+        <!-- 입력받기 -->
+        <form action="loginFirst.html" method="get">
+          <div id="input-content">
+            <div class="input-box">
+              <label>이메일</label>
+              <div class="input-layout">
+                <input type="text" />
+                <button class="checkBtn">중복확인</button>
+              </div>
+            </div>
+
+            <div class="input-box">
+              <label>비밀번호</label>
+              <div class="input-layout">
+                <input type="text" />
+              </div>
+            </div>
+
+            <div class="input-box">
+              <label>닉네임</label>
+              <div class="input-layout">
+                <input type="text" />
+                <button class="checkBtn">중복확인</button>
+              </div>
+            </div>
+          </div>
+          <!-- 성별확인 -->
+          <div class="check-gen-box">
+            <label class="gen-label">성별 확인</label>
+            <div class="check-gen">
+              <div class="aler-ment">
+                <div class="in-right" style="font-size: 24px">👩</div>
+                <div class="in-left">
+                  <p style="font-size: 14px">
+                    Her+Explore는 여성 전용 힐링 플랫폼입니다.
+                  </p>
+                  <p style="font-size: 12px">
+                    안전하고 편안한 환경을 위해 여성분들만 이용 가능합니다.<br />
+                    가입 시 신분증 확인이 있을 수 있습니다.
+                  </p>
+                </div>
+              </div>
+              <label class="gender-femail">
+                <input required class="checkbox" type="checkbox" value="yes" />
+                네, 저는 여성입니다.
+              </label>
+            </div>
+          </div>
+          <!-- 다음버튼 -->
+          <button class="common-btn" id="next-btn">다음</button>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>
