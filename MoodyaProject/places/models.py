@@ -38,6 +38,7 @@ class Place(models.Model):
         ('카페', '카페'),
         ('전시', '전시'),
         ('책방', '책방'),
+        ('운동', '운동'),
     ]
 
     name = models.CharField(max_length=100)

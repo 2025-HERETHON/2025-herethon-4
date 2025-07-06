@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>{{ request.user.first_name }}님 안녕하세요!</h1>
+    <h1>{{ request.user.username }}님 안녕하세요!</h1>
     <p>오늘은 어떤 여정을 떠나볼까요?</p>
     <a href="{% url 'places:recommend_places' %}">+ 새로운 여정 시작하기</a>
 
