@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'places:recommend_places' %}">←</a>
+    <h2>{{ place.name }}</h2>
+    <h3>{{ place.address }}</h3>
+    <h3>{{ place.mood }} × {{ place.activity }} × {{ place.region }}</h3>
+    <p>{{ place.description }}</p>
+    <a href="{% url 'places:create_review' place.id %}">리뷰 작성하기</a>>
+
+    <hr>
+
+    <h2>리뷰</h2>
+    {% for review in reviews %}
+        <p>{{ review.user.profile.name|slice:":1" }}** - ⭐{{ review.rating|floatformat:1 }}</p>
+        <p>{{ review.comment }}</p>
+        <p>{{ review.created_at|date:"Y-m-d" }}</p>
+        {% if request.user == review.user %}
+            <a href = "{% url 'places:update_review' place.id %}">수정하기</a><br>
+            <a href = "{% url 'places:delete_review' place.id %}">삭제하기</a><br>
+        {% endif %}
+        <hr>
+    {% empty %}
+        <p>아직 리뷰가 없습니다.</p>
+    {% endfor %}
+
+    <br><br>
+
+    <a href ="{% url 'places:main' %}">홈 </a>
+    탐험 
+    <a href ="">여정 </a>
+    <a href ="{% url 'accounts:mypage' %}">마이 </a>
+</body>
+</html>
