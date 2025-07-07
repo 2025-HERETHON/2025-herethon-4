@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>오늘의 여정</title>
+</head>
+<body>
+    <h2>오늘의 여정</h2>
+    <p>감정 흐름을 되돌아보아요</p>
+    <p>시작 감정 : {{ journey.get_emotion_display }}</p>
+    <p>추천 코스 : {{ journey.get_region_display }} 힐링 코스</p>
+
+    <hr>
+
+    <section>
+        <h3>장소별 감정 기록</h3>
+        {% for review in place_reviews %}
+            <div>
+                <strong>{{ review.place.name }}</strong>
+                <p>⭐{{ review.rating }} / {{ review.get_emotion_display }}</p>
+                <p>→ {{ review.comment }}</p>
+            </div>
+            <hr>
+        {% empty %}
+            <p>아직 장소별 리뷰가 없습니다.</p>
+        {% endfor %}
+    </section>
+
+    <section>
+        <h3>오늘의 회고</h3>
+        <form method="post">
+            {% csrf_token %}
+            <textarea name="content" rows="5" cols="40" placeholder="오늘 하루를 돌아보며 자유롭게 기록해보세요.">{{ journey.content }}</textarea>
+            <br><br>
+            {% if place_reviews %}
+                <button type="submit">여정 마무리하기</button>
+            {% else %}
+                장소 리뷰를 먼저 작성해주세요
+            {% endif %}
+        </form>
+    </section>
+
+    <br><br>
+    
+    <nav>
+        <a href="{% url 'journeys:main' %}">홈</a> |
+        <a href="{% url 'journeys:explore' %}">탐험</a> |
+        여정 |
+        <a href="{% url 'accounts:mypage' %}">마이</a>
+    </nav>
+</body>
+</html>

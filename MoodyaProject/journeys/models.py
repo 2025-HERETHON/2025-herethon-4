@@ -1,17 +1,8 @@
 from django.db import models
 from django.conf import settings
-import os
-from uuid import uuid4
-from django.utils import timezone
-
-def upload_filepath(instance, filename):
-    today_str = timezone.now().strftime("%Y%m%d")
-    file_basename = os.path.basename(filename)
-    return f'{instance._meta.model_name}/{today_str}/{str(uuid4())}_{file_basename}'
-
 
 class Place(models.Model):
-    MOOD_CHOICES = [
+    EMOTION_CHOICES = [
         ('ANXIOUS', '불안해요'),
         ('EXCITED', '설레요'),
         ('ENERGETIC', '활기차요'),
@@ -38,35 +29,46 @@ class Place(models.Model):
         ('카페', '카페'),
         ('전시', '전시'),
         ('책방', '책방'),
-        ('운동', '운동'),
     ]
 
     name = models.CharField(max_length=100)
-    summary = models.CharField(max_length=100, null=True, blank=True)
-    description = models.TextField()
+    summary = models.CharField(max_length=100)
     address = models.CharField(max_length=200)
-
-    emotion = models.CharField(max_length=20, choices=MOOD_CHOICES)
+    emotion = models.CharField(max_length=20, choices=EMOTION_CHOICES)
     activity_level = models.CharField(max_length=20, choices=ACTIVITY_LEVEL_CHOICES)
     region = models.CharField(max_length=20, choices=REGION_CHOICES)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
-
-    tags = models.CharField(max_length=20, null=True, blank=True)
-    emoji = models.CharField(max_length=5, blank=True)
-    safety_score = models.IntegerField(null=True, blank=True)
-    image = models.ImageField(upload_to=upload_filepath, blank=True)
+    tags = models.CharField(max_length=20)
+    emoji = models.CharField(max_length=5)
+    safety_score = models.IntegerField()
 
     def __str__(self):
         return self.name
 
-
-class Review(models.Model):
+class JourneyReview(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='reviews')
-    rating = models.IntegerField()
-    comment = models.TextField(blank=True)
-    image = models.ImageField(upload_to=upload_filepath, blank=True)
+    date = models.DateField(auto_now_add=True)
+
+    emotion = models.CharField(max_length=20, choices=Place.EMOTION_CHOICES)
+    activity_level = models.CharField(max_length=20, choices=Place.ACTIVITY_LEVEL_CHOICES)
+    region = models.CharField(max_length=20, choices=Place.REGION_CHOICES)
+
+    content = models.TextField()
+    is_completed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.get_username()} - {self.place.name} ({self.rating})"
+        return f"{self.user.username} - {self.date} 여정"
+    
+class PlaceReview(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='reviews')
+    journey = models.ForeignKey(JourneyReview, on_delete=models.CASCADE, related_name='reviews')
+
+    rating = models.IntegerField()
+    emotion = models.CharField(max_length=20, choices=Place.EMOTION_CHOICES)
+    comment = models.TextField(blank=False, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.place.name} ({self.rating})"

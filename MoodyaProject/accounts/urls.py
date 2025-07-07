@@ -5,5 +5,4 @@ app_name = 'accounts'
 
 urlpatterns = [
     path('mypage/', mypage, name='mypage'),
-    path('visits/', visits, name='visits'),
-    ]
+]

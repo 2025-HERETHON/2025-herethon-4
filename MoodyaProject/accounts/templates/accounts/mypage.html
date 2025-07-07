@@ -1,12 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <title>마이페이지</title>
+    <style>
+      body { font-family: sans-serif; padding: 2rem; }
+      h1   { font-size: 1.8rem; margin-bottom: .5rem; }
+      h2   { font-size: 1.2rem; margin-top: 2rem; }
+      .box { border: 1px solid #ccc; border-radius: 10px; padding: 1.5rem; max-width: 420px; }
+      .row { margin: .8rem 0; display: flex; justify-content: space-between; align-items: center; }
+      .btn { padding: .25rem .9rem; border-radius: 6px; border: none; background:#007aff; color:#fff;
+             font-size: .9rem; cursor:pointer; text-decoration:none; }
+    </style>
 </head>
 <body>
-    <h1>마이페이지</h1>
-    <a href ="{% url 'accounts:visits' %}">전체 여정</a>
+
+  <h1>마이페이지</h1>
+  <p>MOODYA와 함께한 지 <strong>{{ days }}</strong>일째</p>
+
+  <h2>내 설정</h2>
+  <div class="box">
+      <div class="row">
+          <span>현재 감정: {{ profile.get_emotion_display }}</span>
+          <a class="btn"
+             href="">
+             변경
+          </a>
+      </div>
+      <div class="row">
+          <span>활동 역량: {{ profile.get_activity_level_display }}</span>
+          <a class="btn"
+             href="">
+             변경
+          </a>
+      </div>
+      <div class="row">
+          <span>지역: {{ profile.get_region_display }}</span>
+          <a class="btn"
+             href="">
+             변경
+          </a>
+      </div>
+  </div>
+
+  <div class="logout-box">
+      <form method="post" action="">
+          {% csrf_token %}
+          <button class="btn" type="submit" style="background:#ff4d4f;">로그아웃</button>
+      </form>
+  </div>
+
+<!-- 완료된 여정들 기능 구현_이유정-->
+  <h2>완료된 여정들</h2>
+
+{% if completed_journeys %}
+    <ul>
+        {% for journey in completed_journeys %}
+            <li>
+                <a href="{% url 'journeys:journey_detail' journey.id %}">
+                    <strong>지역:</strong> {{ journey.get_region_display }} /
+                    <strong>감정:</strong> {{ journey.get_emotion_display }} /
+                    <strong>활동레벨:</strong> {{ journey.get_activity_level_display }}<br>
+
+                    <strong>작성일:</strong> {{ journey.created_at|date:"Y년 m월 d일 H:i" }}<br>
+                </a>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>아직 완료된 여정이 없어요.</p>
+{% endif %}
+
+<br><br>
+
+    <nav>
+        <a href="{% url 'journeys:main' %}">홈</a> |
+        <a href="{% url 'journeys:explore' %}">탐험</a> |
+        <a href="{% url 'journeys:journey' %}">여정</a> |
+        <a href="{% url 'accounts:mypage' %}">마이</a>
+    </nav>
 </body>
 </html>
