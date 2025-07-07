@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>마이페이지</title>
+    <style>
+      body { font-family: sans-serif; padding: 2rem; }
+      h1   { font-size: 1.8rem; margin-bottom: .5rem; }
+      h2   { font-size: 1.2rem; margin-top: 2rem; }
+      .box { border: 1px solid #ccc; border-radius: 10px; padding: 1.5rem; max-width: 420px; }
+      .row { margin: .8rem 0; display: flex; justify-content: space-between; align-items: center; }
+      .btn { padding: .25rem .9rem; border-radius: 6px; border: none; background:#007aff; color:#fff;
+             font-size: .9rem; cursor:pointer; text-decoration:none; }
+    </style>
+</head>
+<body>
+
+  <h1>마이페이지</h1>
+  <p>MOODYA와 함께한 지 <strong>{{ days }}</strong>일째</p>
+
+  <h2>내 설정</h2>
+  <div class="box">
+      <div class="row">
+          <span>현재 감정: {{ profile.get_emotion_display }}</span>
+          <a class="btn"
+             href="{% url 'accounts:emotion_setup' %}?next={% url 'accounts:mypage' %}">
+             변경
+          </a>
+      </div>
+      <div class="row">
+          <span>활동 역량: {{ profile.get_activity_level_display }}</span>
+          <a class="btn"
+             href="{% url 'accounts:activity_level_setup' %}?next={% url 'accounts:mypage' %}">
+             변경
+          </a>
+      </div>
+      <div class="row">
+          <span>지역: {{ profile.get_region_display }}</span>
+          <a class="btn"
+             href="{% url 'accounts:region_setup' %}?next={% url 'accounts:mypage' %}">
+             변경
+          </a>
+      </div>
+  </div>
+
+  <div class="logout-box">
+      <form method="post" action="{% url 'accounts:logout' %}">
+          {% csrf_token %}
+          <button class="btn" type="submit" style="background:#ff4d4f;">로그아웃</button>
+      </form>
+  </div>
+
+</body>
+</html>

@@ -3,11 +3,15 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 import uuid  
+from datetime import date
 from django.contrib.auth.decorators import login_required
 from .forms import EmotionForm
 from .forms import ActivityLevelForm
 from .forms import RegionForm
 from .models import UserProfile
+from accounts.models import UserProfile
+from django.urls import reverse 
+from django.utils import timezone
 # Create your views here.
 
 from django.shortcuts import render, redirect
@@ -48,10 +52,13 @@ def signup(request):
             email=email
         )
 
-        print('회원가입 성공:', user.username)
-        return redirect('home')
+        # --- UserProfile 직접 생성 ---
+        UserProfile.objects.create(user=user)
 
-    # GET 요청
+        # --- 자동 로그인 후 감정 선택 화면으로 이동 ---
+        auth_login(request, user)
+        return redirect('accounts:emotion_setup')
+
     return render(request, 'signup.html')
 
 def login(request):
@@ -81,7 +88,6 @@ def login(request):
                 'error_message': '이메일 또는 비밀번호가 잘못되었습니다.'
             })
 
-    # GET 요청
     return render(request, 'login.html')
 
 def logout(request):
@@ -132,3 +138,76 @@ def region_setup(request):
         form = RegionForm(instance=profile)
 
     return render(request, 'accounts/region_setup.html', {'form': form})
+
+def get_next_url(request, fallback_name):
+    return request.POST.get('next') or request.GET.get('next') or reverse(fallback_name)
+
+# ────────────── 마이페이지 ──────────────
+@login_required
+def mypage(request):
+    user = request.user
+    profile, _ = UserProfile.objects.get_or_create(user=user)
+
+    today       = timezone.localdate()                  
+    joined_day  = timezone.localdate(user.date_joined) 
+    days        = (today - joined_day).days + 1        
+
+    context = {
+        'days': days,
+        'profile': profile,
+    }
+    return render(request, 'accounts/mypage.html', context)
+
+# ───── 감정 선택 ─────
+@login_required
+def emotion_setup(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = EmotionForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect(get_next_url(request, 'accounts:activity_level_setup'))
+    else:
+        form = EmotionForm(instance=profile)
+
+    return render(request, 'accounts/emotion_setup.html', {
+        'form': form,
+        'next': request.GET.get('next')
+    })
+
+# ───── 활동 수준 선택 ─────
+@login_required
+def activity_level_setup(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = ActivityLevelForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect(get_next_url(request, 'accounts:region_setup'))
+    else:
+        form = ActivityLevelForm(instance=profile)
+
+    return render(request, 'accounts/activity_level.html', {
+        'form': form,
+        'next': request.GET.get('next')
+    })
+
+# ───── 지역 선택 ─────
+@login_required
+def region_setup(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = RegionForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect(get_next_url(request, 'home'))
+    else:
+        form = RegionForm(instance=profile)
+
+    return render(request, 'accounts/region_setup.html', {
+        'form': form,
+        'next': request.GET.get('next')
+    })
