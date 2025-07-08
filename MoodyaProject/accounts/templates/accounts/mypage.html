@@ -50,26 +50,17 @@
       </form>
   </div>
 
-<!-- 완료된 여정들 기능 구현_이유정-->
-  <h2>완료된 여정들</h2>
+<h2>저장한 장소들</h2>
 
-{% if completed_journeys %}
-    <ul>
-        {% for journey in completed_journeys %}
-            <li>
-                <a href="{% url 'journeys:journey_detail' journey.id %}">
-                    <strong>지역:</strong> {{ journey.get_region_display }} /
-                    <strong>감정:</strong> {{ journey.get_emotion_display }} /
-                    <strong>활동레벨:</strong> {{ journey.get_activity_level_display }}<br>
-
-                    <strong>작성일:</strong> {{ journey.created_at|date:"Y년 m월 d일 H:i" }}<br>
-                </a>
-            </li>
-            <hr>
-        {% endfor %}
-    </ul>
+{% if liked_places %}
+  {% for place in liked_places %}
+    <div>
+      <h3>{{ place.name }}</h3>
+      <hr>
+    </div>
+  {% endfor %}
 {% else %}
-    <p>아직 완료된 여정이 없어요.</p>
+  <p>아직 좋아요 누른 장소가 없습니다.</p>
 {% endif %}
 
 <br><br>

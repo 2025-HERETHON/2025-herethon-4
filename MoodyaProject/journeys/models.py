@@ -41,6 +41,7 @@ class Place(models.Model):
     tags = models.CharField(max_length=20)
     emoji = models.CharField(max_length=5)
     safety_score = models.IntegerField()
+    liked_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_places', blank=True)
 
     def __str__(self):
         return self.name

@@ -43,6 +43,7 @@ class UserProfile(models.Model):
         null=True,
         blank=False
     )
+    liked_places = models.ManyToManyField('journeys.Place', related_name='liked_by', blank=True)
 
     def __str__(self):
         return f"{self.user.username} profile"

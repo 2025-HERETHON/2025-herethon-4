@@ -35,13 +35,13 @@ def main(request):
         .order_by('id')[:3]
     )
 
-    # 최근 작성한 장소 리뷰 3개
+    # 현재 여정에 속한 리뷰만, 최신순으로 가져오기
     place_reviews = (
         PlaceReview.objects
-        .filter(user=user)
+        .filter(journey=journey)
         .select_related('place')
         .order_by('-created_at')[:3]
-    )
+        if journey else [])
 
     return render(request, 'journeys/main.html', {
         'places': places,
@@ -216,3 +216,15 @@ def delete_journey(request, journey_id):
     journey = get_object_or_404(JourneyReview, id=journey_id, user=request.user)
     journey.delete()
     return redirect('accounts:mypage')
+
+@login_required
+def like_place(request, place_id):
+    profile = request.user.userprofile
+    place = get_object_or_404(Place, id=place_id)
+
+    if place in profile.liked_places.all():
+        profile.liked_places.remove(place)
+    else:
+        profile.liked_places.add(place)
+
+    return redirect('journeys:journey')

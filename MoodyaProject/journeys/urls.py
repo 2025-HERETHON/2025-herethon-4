@@ -8,6 +8,5 @@ urlpatterns = [
     path('explore/', explore, name='explore'),
     path('create-review/<int:place_id>/', create_place_review, name='create_place_review'),
     path('journey/', journey, name='journey'),
-    path('detail/<int:journey_id>/', journey_detail, name='journey_detail'),
-    path('journey/<int:journey_id>/delete/', delete_journey, name='delete_journey'),
+    path('jouney/like/<int:place_id>', like_place, name='like_place'),
 ]

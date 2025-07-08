@@ -40,6 +40,23 @@
         </form>
     </section>
 
+    <br><br><hr>
+
+    <h2>오늘 방문한 장소가 마음에 들었나요?</h2>
+    마음에 든 장소를 저장해서 나중에 다시 방문해 주세요
+    {% for review in place_reviews %}
+        <h3>{{ review.place.name }}</h3>
+        <form method="POST" action="{% url 'journeys:like_place' review.place.id %}">
+            {% csrf_token %}
+            {% if review.place in request.user.userprofile.liked_places.all %}
+            <button type="submit">좋아요 취소</button>
+            {% else %}
+                <button type="submit">좋아요</button>
+            {% endif %}
+        </form>
+    {% endfor %}
+
+
     <br><br>
     
     <nav>
