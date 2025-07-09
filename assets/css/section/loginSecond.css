@@ -82,6 +82,7 @@ form {
   margin: 27px 0;
   padding: 28px 20px;
   padding-right: 0;
+  cursor: pointer;
 }
 
 .click-box:hover {
