@@ -1,15 +1,185 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="../assets/css/style.css">
-   <link rel="stylesheet" href="../assets/css/section/suggestCourse.css" />
-   <title>MOODYA Suggest Course</title>
-</head>
-<body>
-   <div id="wrap" class="container">
-      <div>코스 추천 페이지입니다.</div>
-   </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/section/suggestCourse.css" />
+    <title>MOODYA Suggest Course</title>
+  </head>
+  <body>
+    <div id="wrap" class="container">
+      <div class="suggest-page">
+        <header class="suggest-header">
+          <div class="top-row">
+            <img src="../img/back_icon.svg" alt="뒤로 가기" class="back-icon" />
+            <h2>오늘의 탐험</h2>
+          </div>
+          <p class="state-option">
+            <span>서북권</span>
+            <span>힐링 코스를 따라 여정을 기록해 보아요</span>
+          </p>
+        </header>
+
+        <div class="progress-status">
+          <div class="progress-top">
+            <span class="progress-label">진행 상황</span>
+            <span class="progress-count">0/2 완료</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar"></div>
+          </div>
+        </div>
+
+        <section class="suggest-list">
+          <div class="place-card">
+            <div class="place-top">
+              <div class="emoji">🌳</div>
+              <div class="tag-set">
+                <span class="num-tag">1</span>
+                <span class="tag">자연힐링</span>
+              </div>
+            </div>
+
+            <div class="place-info">
+              <div class="place-title">
+                <h3>연남동 연트럴파크</h3>
+                <div class="review-btn">리뷰 작성하기</div>
+              </div>
+              <p class="oneline-sum">조용한 산책로, 혼자 앉아 쉬기 좋음</p>
+
+              <div class="location">
+                <img
+                  src="../img/placemark.svg"
+                  alt="위치"
+                  class="location_icon"
+                />
+                <span class="location-content">서울시 마포구</span>
+              </div>
+              <div class="safty">
+                <img
+                  src="../img/safety.svg"
+                  alt="여성 안전도"
+                  class="safty-icon"
+                />
+                <span class="badge">여성 안전도</span>
+                <span class="percent">96%</span>
+              </div>
+              <button class="record-btn">
+                <span>이 곳에서의 여정 기록하기</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="place-card">
+            <div class="place-top">
+              <div class="emoji">☕</div>
+              <div class="tag-set">
+                <span class="num-tag">2</span>
+                <span class="tag">카페 투어</span>
+              </div>
+            </div>
+
+            <div class="place-info">
+              <div class="place-title">
+                <h3>테일러 커피 연남점</h3>
+                <div class="review-btn">리뷰 작성하기</div>
+              </div>
+              <p class="oneline-sum">혼자 산책하기 좋은 안전한 도심 속 자연</p>
+
+              <div class="location">
+                <img
+                  src="../img/placemark.svg"
+                  alt="위치"
+                  class="location_icon"
+                />
+                <span class="location-content">서울시 마포구</span>
+              </div>
+              <div class="safty">
+                <img
+                  src="../img/safety.svg"
+                  alt="여성 안전도"
+                  class="safty-icon"
+                />
+                <span class="badge">여성 안전도</span>
+                <span class="percent">96%</span>
+              </div>
+              <button class="record-btn">
+                <span>이 곳에서의 여정 기록하기</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <footer class="nav-bar">
+          <div class="nav-item">
+            <img src="../img/home.svg" alt="홈" />
+            <span>홈</span>
+          </div>
+          <div class="nav-item-now">
+            <img src="../img/search_now.svg" alt="탐험" />
+            <span>탐험</span>
+          </div>
+          <div class="nav-item">
+            <img src="../img/map-linear.svg" alt="여정" />
+            <span>여정</span>
+          </div>
+          <div class="nav-item">
+            <img src="../img/profile.svg" alt="마이" />
+            <span>마이</span>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <div class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">연남동 연트럴 파크</h3>
+          <span class="close-btn" aria-label="모달 닫기">&times;</span>
+        </div>
+        <p class="region">서북권</p>
+
+        <div class="rating-section">
+          <div class="rating-label">만족도</div>
+          <div class="stars">
+            <img src="../img/star-outline2.svg" alt="별1" class="star" />
+            <img src="../img/star-outline2.svg" alt="별2" class="star" />
+            <img src="../img/star-outline2.svg" alt="별3" class="star" />
+            <img src="../img/star-outline2.svg" alt="별4" class="star" />
+            <img src="../img/star-outline2.svg" alt="별5" class="star" />
+          </div>
+        </div>
+
+        <div class="dropdown-section">
+          <label for="feeling-select" class="review-label">감정 기록</label>
+          <div class="dropdown">
+            <div class="dropdown-selected">다녀온 후에 어떤 기분이셨나요?</div>
+            <ul class="dropdown-options hidden">
+              <li data-value="불안해요">불안해요</li>
+              <li data-value="설레요">설레요</li>
+              <li data-value="활기차요">활기차요</li>
+              <li data-value="궁금해요">궁금해요</li>
+              <li data-value="평온해요">평온해요</li>
+            </ul>
+          </div>
+          <input type="hidden" id="feeling" name="feeling" />
+        </div>
+
+        <div class="review-section">
+          <label for="review-text" class="review-label">자세한 여정 기록</label>
+          <textarea
+            id="review-text"
+            placeholder="여정을 기록해 보아요."
+            rows="4"
+          ></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button class="submit-btn" disabled>여정 기록 저장하기</button>
+        </div>
+      </div>
+    </div>
+    <script src="../assets/js/suggestCourse.js"></script>
+  </body>
 </html>
