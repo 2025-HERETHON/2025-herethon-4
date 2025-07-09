@@ -1,0 +1,255 @@
+.routeRecord {
+  width: 390px;
+  height: 844px;
+  background-color: var(--background);
+  padding: 20px;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 7px;
+  padding: 20px 20px 15px 20px;
+  margin-bottom: 24px;
+  border: 2px solid #e8e9ed;
+  width: 341px;
+}
+
+/* 오늘의 여정 */
+.route-card h3 {
+  font-size: 18px;
+  margin: 0;
+  line-height: 1;
+  color: #353e4b;
+  font-weight: 700;
+}
+
+.route-card p {
+  color: #5d6673;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 2;
+}
+
+.start-emotion,
+.suggest-course {
+  background-color: #fefce8;
+  border: 1px solid #e8e9ed;
+  padding: 12px 16px;
+  border-radius: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.label {
+  font-weight: bold;
+  color: #353e4b;
+}
+
+.emotion {
+  color: #9334e9;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.where-course {
+  display: flex;
+  gap: 5px;
+}
+
+.region {
+  color: #9334e9;
+  font-weight: 600;
+}
+
+.course-type {
+  color: #333;
+}
+
+/* 장소별 감정 기록 */
+.feeling-record h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  line-height: 1;
+  color: #353e4b;
+  font-weight: 700;
+}
+
+.place-review {
+  background-color: #f9f9f9;
+  padding: 12px 14px;
+  border-radius: 7px;
+  margin-bottom: 12px;
+  line-height: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.place-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #353e4b;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.feeling-badge {
+  background-color: #dbe9fe;
+  color: #2463eb;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 16px;
+  display: inline-block;
+  margin-left: 8px;
+  line-height: 1;
+}
+
+.feeling-ment {
+  line-height: 1;
+  font-size: 12px;
+  font-weight: 500;
+  color: #5d6673;
+  margin-bottom: 10px;
+}
+
+.place-review p {
+  font-size: 13px;
+  color: #444;
+  margin: 6px 0 0;
+  line-height: 1;
+}
+
+/* 오늘의 회고 */
+.day-review h3 {
+  font-size: 18px;
+  line-height: 1;
+  color: #353e4b;
+  font-weight: 700;
+}
+
+.day-review p {
+  color: #5d6673;
+  font-size: 12px;
+  font-weight: 700;
+  /* margin-bottom: 5px; */
+  line-height: 2;
+}
+
+.dayreview-inputbox {
+  margin-top: 10px;
+  line-height: 1;
+}
+
+#dayreview-text {
+  width: 100%;
+  height: 73px;
+  border-radius: 5px;
+  border: 1px solid #e8e9ed;
+  padding: 12px;
+  font-family: inherit;
+  resize: none;
+  margin-bottom: 12px;
+}
+
+.dayreview-btn {
+  width: 100%;
+  background-color: #d9b4fc;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 마음에 든 장소 저장 */
+.my-pick h3 {
+  margin-bottom: 4px;
+  line-height: 1;
+  color: #353e4b;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+}
+
+.my-pick p {
+  color: #666;
+  font-size: 12px;
+  margin-bottom: 16px;
+  line-height: 2;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+}
+
+.mypick-btn {
+  background-color: #fff;
+  color: #9334e9;
+  border: 1px solid #f4eaff;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  cursor: pointer;
+  margin-left: auto;
+  display: inline-block;
+}
+
+/* 네비 바 */
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 390px;
+  background: white;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 100;
+  line-height: 2;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #999;
+}
+
+.nav-item img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 2px;
+}
+
+.nav-item-now {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  font-size: 11px;
+  font-weight: 600;
+  color: #9334e9;
+}
+
+.nav-item-now img {
+  width: 23px;
+  height: 23px;
+  margin-bottom: 2px;
+}

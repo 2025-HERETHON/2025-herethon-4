@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/section/routeRecord.css" />
+    <title>MOODYA RouteRecord</title>
+  </head>
+  <body>
+    <div id="wrap" class="container">
+      <div class="routeRecord">
+        <!-- 오늘의 여정 -->
+        <section class="card">
+          <div class="route-card">
+            <h3>오늘의 여정</h3>
+            <p>감정 흐름을 되돌아보아요</p>
+          </div>
+
+          <div class="start-emotion">
+            <span class="label">시작 감정</span>
+            <span class="emotion">😰불안해요</span>
+          </div>
+
+          <div class="suggest-course">
+            <span class="label">추천 코스</span>
+            <div class="where-course">
+              <span class="region">서북권</span>
+              <span class="course-type">힐링 코스</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 장소별 감정 기록 -->
+        <section class="card">
+          <div class="feeling-record">
+            <h3>장소별 감정 기록</h3>
+          </div>
+
+          <div class="place-review">
+            <span class="place-name">연남동 연트럴파크</span>
+            <span class="feeling-badge">평온해요</span>
+          </div>
+          <p class="feeling-ment">
+            → 공원에서 자연을 바라보니 마음이 차분해졌어요
+          </p>
+
+          <div class="place-review">
+            <span class="place-name">테일러커피 연남점</span>
+            <span class="feeling-badge">평온해요</span>
+          </div>
+          <p class="feeling-ment">
+            → 차분해진 마음으로 맛있는 커피 한 잔 먹고 생각을 정리했어요
+          </p>
+        </section>
+
+        <!-- 오늘의 회고 -->
+        <section class="card">
+          <div class="day-review">
+            <h3>오늘의 회고</h3>
+            <p>감정 흐름을 되돌아보아요</p>
+
+            <div class="dayreview-inputbox">
+              <textarea id="dayreview-text" rows="4"></textarea>
+              <button class="dayreview-btn">오늘의 여정 마치기</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 마음에 든 장소 저장 -->
+        <section class="card">
+          <div class="my-pick">
+            <h3>오늘 방문한 장소가 마음에 들었나요?</h3>
+            <p>마음에 든 장소를 저장해서 나중에 다시 방문해 보세요</p>
+
+            <div class="place-review">
+              <span class="place-name">연남동 연트럴파크</span>
+              <button class="mypick-btn">⭐저장하기</button>
+            </div>
+            <div class="place-review">
+              <span class="place-name">테일러커피 연남점</span>
+              <button class="mypick-btn">⭐저장하기</button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <footer class="nav-bar">
+        <div class="nav-item">
+          <img src="../img/home.svg" alt="홈" />
+          <span>홈</span>
+        </div>
+        <div class="nav-item">
+          <img src="../img/search.svg" alt="탐험" />
+          <span>탐험</span>
+        </div>
+        <div class="nav-item-now">
+          <img src="../img/map-now.svg" alt="여정" />
+          <span>여정</span>
+        </div>
+        <div class="nav-item">
+          <img src="../img/profile.svg" alt="마이" />
+          <span>마이</span>
+        </div>
+      </footer>
+    </div>
+    <script src="../assets/js/routeRecord.js"></script>
+  </body>
+</html>
