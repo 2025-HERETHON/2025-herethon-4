@@ -3,15 +3,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   clickBoxes.forEach((box) => {
     box.addEventListener("click", () => {
+      // 모든 박스 초기화
       clickBoxes.forEach((b) => {
         b.classList.remove("clicked");
+
         const img = b.querySelector(".checkImage");
-        if (img) img.src = "../assets/images/none-checkBtn.svg";
+        if (img) {
+          img.src = "../assets/images/none-checkBtn.svg";
+        }
       });
+
+      // 현재 박스 클릭 처리
       box.classList.add("clicked");
 
       const checkImg = box.querySelector(".checkImage");
-      if (checkImg) checkImg.src = "../assets/images/checkBtn.svg";
+      if (checkImg) {
+        checkImg.src = "../assets/images/checkBtn.svg";
+      }
     });
   });
 });
