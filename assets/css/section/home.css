@@ -1,10 +1,20 @@
 #wrap {
     justify-content: flex-start;
-    padding-bottom: 75px;
 }
 
 .container {
     position: relative;
+}
+
+.box {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: 0;
+    background-color: var(--background);
 }
 
 .hello {
@@ -189,7 +199,7 @@ h3 {
 .recents {
     width: 324px;
     margin-top: 23px;
-    margin-bottom: 65px;
+    margin-bottom: 100px;
 }
 
 .recent {

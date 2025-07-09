@@ -1,10 +1,20 @@
 #wrap {
     justify-content: flex-start;
-    padding-bottom: 75px;
 }
 
 .container {
     position: relative;
+}
+
+.box {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: 0;
+    background-color: var(--background);
 }
 
 .mypage_top {
@@ -191,7 +201,7 @@ hr {
 
 .logout {
     margin-top: 25px;
-    margin-bottom: 66px;
+    margin-bottom: 100px;
     padding: 13px 127.5px;
     background-color: #9334E97F;
     font-size: 14px;
