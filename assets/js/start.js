@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginBtn = document.querySelector(".login-btn");
 
   startBtn.addEventListener("click", function () {
-    window.location.href = "signup.html";
+    window.location.href = "signUp.html";
   });
 
   loginBtn.addEventListener("click", function (e) {
