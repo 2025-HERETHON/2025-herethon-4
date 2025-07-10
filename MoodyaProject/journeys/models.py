@@ -3,11 +3,12 @@ from django.conf import settings
 
 class Place(models.Model):
     EMOTION_CHOICES = [
-        ('ANXIOUS', '불안해요'),
-        ('EXCITED', '설레요'),
+        ('ANXIOUS',   '불안해요'),
+        ('ANGRY',   '화나요'),
         ('ENERGETIC', '활기차요'),
-        ('CURIOUS', '궁금해요'),
-        ('CALM', '평온해요'),
+        ('TIRED',   '지쳤어요'),
+        ('CALM',      '평온해요'),
+        ('EXCITED',   '설레요'),
     ]
 
     ACTIVITY_LEVEL_CHOICES = [
