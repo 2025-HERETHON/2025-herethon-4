@@ -2,7 +2,11 @@
 URL configuration for MoodyaProject project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
+<<<<<<< HEAD
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
+=======
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+>>>>>>> 김민기
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,6 +19,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+<<<<<<< HEAD
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,4 +28,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),  
     path('journeys/', include('journeys.urls')),  
+=======
+from django.urls import path,include
+from . import views #임시
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('accounts/',include('accounts.urls', namespace='accounts')),
+    path('', views.home, name='home'), #임시
+>>>>>>> 김민기
 ]
