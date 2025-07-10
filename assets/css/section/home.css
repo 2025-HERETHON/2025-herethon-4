@@ -95,14 +95,6 @@ p {
   margin-top: 30px;
   border: 1px solid var(--lightgray);
   border-radius: 7px;
-  background-color: var(--lightyellow);
-  padding-bottom: 23px;
-}
-
-.feellike_left {
-  display: block;
-  margin-left: 17px;
-  margin-top: 22px;
 }
 
 h3 {

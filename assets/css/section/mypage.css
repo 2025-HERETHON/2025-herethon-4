@@ -97,17 +97,40 @@ h3 {
     margin-top: 3px;
 }
 
+.blue_tag {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    padding: 3px 8px;
+    background-color: var(--lightblue);
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--blue);
+}
+
 .yellow_tag {
     display: flex;
     width: fit-content;
     height: fit-content;
     padding: 3px 8px;
     background-color: var(--lightyellow);
-    border-radius: 50px;
-    margin-left: 7px;
+    border-radius: 7px;
     font-size: 12px;
     font-weight: 600;
     color: var(--brown);
+}
+
+.green_tag {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    padding: 3px 8px;
+    background-color: #EFFDF4;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #17A34A;
 }
 
 .change {
