@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const img = b.querySelector(".checkImage");
         if (img) {
-          img.src = "../assets/images/none-checkBtn.svg";
+          img.src = "../assets/img/none-checkBtn.svg";
         }
       });
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const checkImg = box.querySelector(".checkImage");
       if (checkImg) {
-        checkImg.src = "../assets/images/checkBtn.svg";
+        checkImg.src = "../assets/img/checkBtn.svg";
       }
     });
   });
