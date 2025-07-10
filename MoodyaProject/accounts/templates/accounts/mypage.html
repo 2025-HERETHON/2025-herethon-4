@@ -23,50 +23,42 @@
       <div class="row">
           <span>현재 감정: {{ profile.get_emotion_display }}</span>
           <a class="btn"
-<<<<<<< HEAD
-             href="">
-=======
+
              href="{% url 'accounts:emotion_setup' %}?next={% url 'accounts:mypage' %}">
->>>>>>> 김민기
+
              변경
           </a>
       </div>
       <div class="row">
           <span>활동 역량: {{ profile.get_activity_level_display }}</span>
           <a class="btn"
-<<<<<<< HEAD
-             href="">
-=======
+
+
              href="{% url 'accounts:activity_level_setup' %}?next={% url 'accounts:mypage' %}">
->>>>>>> 김민기
+
              변경
           </a>
       </div>
       <div class="row">
           <span>지역: {{ profile.get_region_display }}</span>
           <a class="btn"
-<<<<<<< HEAD
-             href="">
-=======
+
              href="{% url 'accounts:region_setup' %}?next={% url 'accounts:mypage' %}">
->>>>>>> 김민기
+
              변경
           </a>
       </div>
   </div>
 
   <div class="logout-box">
-<<<<<<< HEAD
-      <form method="post" action="">
-=======
+
       <form method="post" action="{% url 'accounts:logout' %}">
->>>>>>> 김민기
           {% csrf_token %}
           <button class="btn" type="submit" style="background:#ff4d4f;">로그아웃</button>
       </form>
   </div>
 
-<<<<<<< HEAD
+
 <h2>저장한 장소들</h2>
 
 {% if liked_places %}
@@ -90,7 +82,3 @@
     </nav>
 </body>
 </html>
-=======
-</body>
-</html>
->>>>>>> 김민기

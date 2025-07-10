@@ -1,9 +1,6 @@
 from django.contrib import admin
-<<<<<<< HEAD
-from .models import *
-=======
+
 from .models import UserProfile
->>>>>>> 김민기
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
