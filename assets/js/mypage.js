@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // 로그아웃
   const logoutBtn = document.querySelector(".logout");
 
   logoutBtn.addEventListener("click", () => {
     window.location.href = "../index.html";
   });
 
+  // 내 설정 값 변경
   const emotion = localStorage.getItem("emotion");
   const activity = localStorage.getItem("activity");
   const region = localStorage.getItem("region");
