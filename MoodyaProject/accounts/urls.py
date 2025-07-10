@@ -1,12 +1,4 @@
 from django.urls import path
-<<<<<<< HEAD
-from .views import *
-
-app_name = 'accounts'
-
-urlpatterns = [
-    path('mypage/', mypage, name='mypage'),
-=======
 from accounts import views
 
 app_name = "accounts"
@@ -19,5 +11,4 @@ urlpatterns = [
     path('activity/', views.activity_level_setup, name='activity_level_setup'),
     path('region/', views.region_setup, name='region_setup'),
     path('mypage/', views.mypage, name='mypage'),   
->>>>>>> 김민기
 ]
