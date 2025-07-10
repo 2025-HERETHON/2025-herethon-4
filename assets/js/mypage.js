@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const logoutBtn = document.querySelector(".logout");
 
   logoutBtn.addEventListener("click", () => {
-    window.location.href = "index.html";
+    window.location.href = "../index.html";
   });
 
   // URL 파라미터에서 감정 가져와 표시
