@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // 1. 뒤로가기 버튼
   const backIcon = document.querySelector(".back-icon");
   backIcon.addEventListener("click", function () {
-    window.location.href = "../index.html";
+    window.location.href = "./pages/home.html";
   });
 
   // 2. 모달 열기
