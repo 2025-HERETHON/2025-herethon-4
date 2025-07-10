@@ -57,7 +57,7 @@ def login(request):
 # 로그아웃
 def logout(request):
     auth_logout(request)
-    return redirect('home')
+    return redirect('accounts:login')
 
 # 감정 선택
 @login_required
@@ -93,7 +93,7 @@ def region_setup(request):
         form = RegionForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect(get_next_url(request, 'home'))
+            return redirect(get_next_url(request, 'journeys:main'))
     else:
         form = RegionForm(instance=profile)
     return render(request, 'accounts/region_setup.html', {'form': form, 'next': request.GET.get('next')})
