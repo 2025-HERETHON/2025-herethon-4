@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const img = b.querySelector(".checkImage");
         if (img) {
-          img.src = "../assets/images/none-checkBtn.svg";
+          img.src = "../assets/img/none-checkBtn.svg";
         }
       });
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const checkImg = box.querySelector(".checkImage");
       if (checkImg) {
-        checkImg.src = "../assets/images/checkBtn.svg";
+        checkImg.src = "../assets/img/checkBtn.svg";
       }
     });
   });
@@ -34,7 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
       const value = selected.value;
-      window.location.href = `mypage.html?emotion=${encodeURIComponent(value)}`;
+      localStorage.setItem("emotion", value);
+      window.location.href = "mypage.html";
     });
   }
 
@@ -49,7 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
       const value = selected.value;
-      window.location.href = `mypage.html?activity=${encodeURIComponent(value)}`;
+      localStorage.setItem("activity", value);
+      window.location.href = "mypage.html";
     });
   }
 
@@ -64,7 +66,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
       const value = selected.value;
-      window.location.href = `mypage.html?region=${encodeURIComponent(value)}`;
+    localStorage.setItem("region", value);
+      window.location.href = "mypage.html";
     });
   }
 });
