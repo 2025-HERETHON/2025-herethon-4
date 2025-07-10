@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/section/loginThird.css" />
+    <link rel="stylesheet" href="../assets/css/section/mypageThird.css" />
     <title>MOODYA Sign Up</title>
     <!--회원가입 단계 중 지역 선택 페이지입니다. -->
   </head>
@@ -12,12 +12,9 @@
     <div id="wrap" class="container">
       <div class="box">
         <div class="top-box">
-          <a href="loginSecond.html" id="backBtn">
+          <a href="mypage.html" id="backBtn">
             <img src="../assets/img/backBtn.svg" alt="backBtn" />
           </a>
-          <div class="fill-line"></div>
-          <div class="fill-line"></div>
-          <div class="fill-line"></div>
         </div>
         <div class="intro-ment">
           <p id="first-ment">오늘, 어디에서 나를 쉬게 해줄까요?</p>
@@ -27,7 +24,7 @@
         </div>
 
         <!-- 지역선택 확인 -->
-        <form action="home.html" method="get">
+        <form action="mypage.html" method="get" id="settingForm">
           <div class="click-wrap">
             <label class="click-box">
               <input type="radio" name="region" value="서북권" hidden />
@@ -104,6 +101,6 @@
         </form>
       </div>
     </div>
-    <script src="../assets/js/login.js"></script>
+    <script src="../assets/js/mysetting.js"></script>
   </body>
 </html>
