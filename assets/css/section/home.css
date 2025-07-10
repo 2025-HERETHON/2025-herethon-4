@@ -165,12 +165,12 @@ h3 {
   background: linear-gradient(to bottom right, #f3e8ff, #fce6f3);
 }
 
-.suggest_img img {
+.emoji {
   width: 35.27px;
-  margin-top: 15px;
+  padding-top: 15px;
   margin-left: 58.42px;
   margin-right: 57.31px;
-  margin-bottom: 11px;
+  padding-bottom: 11px;
 }
 
 .course_name {
