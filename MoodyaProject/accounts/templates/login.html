@@ -1,54 +1,63 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets/css/section/login.css' %}" />
-  <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
-  <title>MOODYA Login</title>
-</head>
-<body>
-  <div id="wrap" class="container">
-    <div class="box">
-      <!-- 시작화면으로 이동 -->
-      <a href="{% url 'home' %}" id="backBtn">
-        <img src="{% static 'assets/img/backBtn.svg' %}" alt="backBtn" />
-      </a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/section/login.css' %}" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'assets/favicon.ico' %}"
+    />
+    <title>MOODYA Login</title>
+  </head>
+  <body>
+    <div id="wrap" class="container">
+      <div class="box">
+        <!-- 시작화면으로 이동 -->
+        <a href="{% url 'home' %}" id="backBtn">
+          <img src="{% static 'assets/img/backBtn.svg' %}" alt="backBtn" />
+        </a>
 
-      <div class="intro-ment">
-        <p id="first-ment">다시 만나서 반가워요</p>
-        <p id="second-ment">오늘은 어떤 힐링 여정을 떠나볼까요?</p>
-      </div>
-
-      <!-- 로그인 입력창 -->
-      <form method="POST" action="{% url 'accounts:login' %}" class="login-form">
-        {% csrf_token %}
-        <div id="input-content">
-          <div class="input-box">
-            <label for="email">이메일</label>
-            <input type="email" name="email" id="email" required />
-          </div>
-          <div class="input-box">
-            <label for="password">비밀번호</label>
-            <input type="password" name="password" id="password" required />
-          </div>
+        <div class="intro-ment">
+          <p id="first-ment">다시 만나서 반가워요</p>
+          <p id="second-ment">오늘은 어떤 힐링 여정을 떠나볼까요?</p>
         </div>
-        <button class="common-btn" type="submit">로그인</button>
-      </form>
-      
 
-      <!-- 에러 메시지 표시 -->
-      {% if error %}
-        <p style="color: red; margin-top: 10px;">{{ error }}</p>
-      {% endif %}
+        <!-- 로그인 입력창 -->
+        <form
+          method="POST"
+          action="{% url 'accounts:login' %}"
+          class="login-form"
+        >
+          {% csrf_token %}
+          <div id="input-content">
+            <div class="input-box">
+              <label for="email">이메일</label>
+              <input type="email" name="email" id="email" required />
+            </div>
+            <div class="input-box">
+              <label for="password">비밀번호</label>
+              <input type="password" name="password" id="password" required />
+            </div>
+          </div>
+          <button class="common-btn" type="submit">로그인</button>
+        </form>
 
-      <p id="goto-signup">
-        아직 계정이 없으신가요?
-        <a href="{% url 'accounts:signup' %}" id="signup-link">회원가입하기</a>
-      </p>
+        <!-- 에러 메시지 표시 -->
+        {% if error %}
+        <p style="color: red; margin-top: 10px">{{ error }}</p>
+        {% endif %}
+
+        <p id="goto-signup">
+          아직 계정이 없으신가요?
+          <a href="{% url 'accounts:signup' %}" id="signup-link"
+            >회원가입하기</a
+          >
+        </p>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

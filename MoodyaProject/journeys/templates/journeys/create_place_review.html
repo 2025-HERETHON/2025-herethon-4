@@ -1,38 +1,114 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>리뷰 작성하기</title>
-</head>
-<body>
+  </head>
+  <body>
     <a href="{% url 'journeys:explore' %}">×</a>
 
     <h2>{{ place.name }}</h2>
     <p>{{ place.get_region_display }}</p>
 
-    <hr>
+    <hr />
 
-    <form method="post" action="{% url 'journeys:create_place_review' place.id %}">
-        {% csrf_token %}
+    <form
+      method="post"
+      action="{% url 'journeys:create_place_review' place.id %}"
+    >
+      {% csrf_token %}
 
-        <h4>만족도</h4>
-        <input type="number" name="rating" min="1" max="5" required>
+      <h4>만족도</h4>
+      <input type="number" name="rating" min="1" max="5" required />
 
-        <br>
+      <br />
 
-        <h4>감정 기록</h4>
-        <select name="emotion" required>
-            <option value="" disabled selected>다녀온 후의 감정은 어떠셨나요?</option>
-            {% for value, display in emotion_choices %}
-                <option value="{{ value }}">{{ display }}</option>
-            {% endfor %}
-        </select>
+      <h4>감정 기록</h4>
+      <select name="emotion" required>
+        <option value="" disabled selected>
+          다녀온 후의 감정은 어떠셨나요?
+        </option>
+        {% for value, display in emotion_choices %}
+        <option value="{{ value }}">{{ display }}</option>
+        {% endfor %}
+      </select>
 
-        <h4>자세한 여정 기록</h4>
-        <textarea name="comment" rows="5" cols="40" placeholder="여정을 기록해 보아요."></textarea>
+      <h4>자세한 여정 기록</h4>
+      <textarea
+        name="comment"
+        rows="5"
+        cols="40"
+        placeholder="여정을 기록해 보아요."
+      ></textarea>
 
-        <br><br>
-        <button type="submit">여정 기록 저장하기</button>
+      <br /><br />
+      <button type="submit">여정 기록 저장하기</button>
     </form>
-</body>
+  </body>
 </html>
+{% endcomment %} {% load static %}
+<div class="modal hidden" id="reviewModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">{{ place.name }}</h3>
+      <span class="close-btn" aria-label="모달 닫기" onclick="closeModal()"
+        >&times;</span
+      >
+    </div>
+    <p class="region">{{ place.get_region_display }}</p>
+
+    <form
+      method="post"
+      action="{% url 'journeys:create_place_review' place.id %}"
+    >
+      {% csrf_token %}
+
+      <!-- 만족도 -->
+      <div class="rating-section">
+        <div class="rating-label">만족도</div>
+        <div class="stars">
+          <input type="hidden" name="rating" id="rating" required />
+          {% for i in "12345" %}
+          <img
+            src="{% static 'img/star-outline2.svg' %}"
+            alt="별{{ i }}"
+            class="star"
+            data-value="{{ forloop.counter }}"
+          />
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- 감정 기록 -->
+      <div class="dropdown-section">
+        <label for="feeling-select" class="review-label">감정 기록</label>
+        <div class="dropdown">
+          <div class="dropdown-selected">다녀온 후에 어떤 기분이셨나요?</div>
+          <ul class="dropdown-options hidden">
+            {% for value, display in emotion_choices %}
+            <li data-value="{{ value }}">{{ display }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <input type="hidden" id="feeling" name="emotion" required />
+      </div>
+
+      <!-- 여정 내용 -->
+      <div class="review-section">
+        <label for="review-text" class="review-label">자세한 여정 기록</label>
+        <textarea
+          id="review-text"
+          name="comment"
+          placeholder="여정을 기록해 보아요."
+          rows="4"
+        ></textarea>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="submit-btn" id="submitBtn" disabled>
+          여정 기록 저장하기
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
