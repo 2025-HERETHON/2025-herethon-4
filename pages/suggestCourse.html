@@ -140,10 +140,10 @@
     <div class="modal hidden">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title">연남동 연트럴 파크</h3>
+          <h3 class="modal-title">{{ place.name }}</h3>
           <span class="close-btn" aria-label="모달 닫기">&times;</span>
         </div>
-        <p class="region">서북권</p>
+        <p class="region">{{ request.user.userprofile.get_region_display }}</p>
 
         <div class="rating-section">
           <div class="rating-label">만족도</div>
