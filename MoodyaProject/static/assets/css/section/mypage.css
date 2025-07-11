@@ -148,6 +148,7 @@ hr {
     margin-bottom: 12px;
 }
 
+
 .save_places {
     width: 328px;
     padding: 33px 19px;
@@ -155,10 +156,12 @@ hr {
     border: 1px solid var(--lightgray);
     border-radius: 7px;
     background-color: var(--white);
+
 }
 
 .no_place {
     margin-top: 70px;
+    display: block !important;
 }
 
 .map_img {
@@ -186,7 +189,6 @@ hr {
     margin-top: 10px;
     margin-left: 6.5px;
     margin-right: 6.5px;
-    display: none;
 }
 
 .place_info {
@@ -223,9 +225,10 @@ hr {
 }
 
 .logout {
+    width: 288px;
+    height: 43px;
     margin-top: 25px;
     margin-bottom: 100px;
-    padding: 13px 127.5px;
     background-color: #9334E97F;
     font-size: 14px;
     font-weight: 500;

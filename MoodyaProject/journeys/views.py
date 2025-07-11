@@ -35,13 +35,12 @@ def main(request):
         .order_by('id')[:2]
     )
 
-    # 현재 여정에 속한 리뷰만, 최신순으로 가져오기
+    # 전체 리뷰를 최신순으로 가져오기
     place_reviews = (
         PlaceReview.objects
-        .filter(journey=journey)
+        .filter(user=user)
         .select_related('place')
-        .order_by('-created_at')[:3]
-        if journey else [])
+        .order_by('-created_at')[:3])
 
     return render(request, 'journeys/main.html', {
         'places': places,
@@ -51,7 +50,7 @@ def main(request):
 
 
 @login_required
-def explore(request):
+def  explore(request):
     user = request.user
     profile = user.userprofile
 

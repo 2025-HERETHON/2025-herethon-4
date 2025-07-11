@@ -1,69 +1,118 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>오늘의 여정</title>
-</head>
-<body>
-    <h2>오늘의 여정</h2>
-    <p>감정 흐름을 되돌아보아요</p>
-    <p>시작 감정 : {{ journey.get_emotion_display }}</p>
-    <p>추천 코스 : {{ journey.get_region_display }} 힐링 코스</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/section/routeRecord.css' %}" />
+    <title>MOODYA RouteRecord</title>
+  </head>
+  <body>
+    <div id="wrap" class="container">
+      <div class="routeRecord">
+        <!-- 오늘의 여정 -->
+        <section class="card">
+          <div class="route-card">
+            <h3>오늘의 여정</h3>
+            <p>감정 흐름을 되돌아보아요</p>
+          </div>
 
-    <hr>
+          <div class="start-emotion">
+            <span class="label">시작 감정</span>
+            <span class="emotion">{{ journey.get_emotion_display }}</span>
+          </div>
 
-    <section>
-        <h3>장소별 감정 기록</h3>
-        {% for review in place_reviews %}
-            <div>
-                <strong>{{ review.place.name }}</strong>
-                <p>⭐{{ review.rating }} / {{ review.get_emotion_display }}</p>
-                <p>→ {{ review.comment }}</p>
+          <div class="suggest-course">
+            <span class="label">추천 코스</span>
+            <div class="where-course">
+              <span class="region">{{ journey.get_region_display }}</span>
+              <span class="course-type">힐링 코스</span>
             </div>
-            <hr>
-        {% empty %}
-            <p>아직 장소별 리뷰가 없습니다.</p>
-        {% endfor %}
-    </section>
+          </div>
+        </section>
 
-    <section>
-        <h3>오늘의 회고</h3>
-        <form method="post">
-            {% csrf_token %}
-            <textarea name="content" rows="5" cols="40" placeholder="오늘 하루를 돌아보며 자유롭게 기록해보세요.">{{ journey.content }}</textarea>
-            <br><br>
-            {% if place_reviews %}
-                <button type="submit">여정 마무리하기</button>
-            {% else %}
-                장소 리뷰를 먼저 작성해주세요
-            {% endif %}
-        </form>
-    </section>
+        <!-- 장소별 감정 기록 -->
+        <section class="card">
+          <div class="feeling-record">
+            <h3>장소별 감정 기록</h3>
+          </div>
+          {% for review in place_reviews %}
+          <div class="place-review">
+            <span class="place-name">{{ review.place.name }}</span>
+            <span class="feeling-badge">{{ review.get_emotion_display }}</span>
+          </div>
+          <p class="feeling-ment">→ {{ review.comment }}</p>
+          {% empty %}
+          <p class="feeling-ment">아직 장소별 리뷰가 없습니다.</p>
+          {% endfor %}
+        </section>
 
-    <br><br><hr>
+        <!-- 오늘의 회고 -->
+        <section class="card">
+          <div class="day-review">
+            <h3>오늘의 회고</h3>
+            <p>감정 흐름을 되돌아보아요</p>
+            <form method="post">
+              {% csrf_token %}
+              <div class="dayreview-inputbox">
+                <textarea
+                  id="dayreview-text"
+                  name="content"
+                  rows="4"
+                >{{ journey.content }}</textarea>
+                {% if place_reviews %}
+                <button class="dayreview-btn" type="submit">오늘의 여정 마치기</button>
+                {% else %}
+                <p class="warn">장소 리뷰를 먼저 작성해주세요</p>
+                {% endif %}
+              </div>
+            </form>
+          </div>
+        </section>
 
-    <h2>오늘 방문한 장소가 마음에 들었나요?</h2>
-    마음에 든 장소를 저장해서 나중에 다시 방문해 주세요
-    {% for review in place_reviews %}
-        <h3>{{ review.place.name }}</h3>
-        <form method="POST" action="{% url 'journeys:like_place' review.place.id %}">
-            {% csrf_token %}
-            {% if review.place in request.user.userprofile.liked_places.all %}
-            <button type="submit">좋아요 취소</button>
-            {% else %}
-                <button type="submit">좋아요</button>
-            {% endif %}
-        </form>
-    {% endfor %}
+        <!-- 마음에 든 장소 저장 -->
+        <section class="card">
+          <div class="my-pick">
+            <h3>오늘 방문한 장소가 마음에 들었나요?</h3>
+            <p>마음에 든 장소를 저장해서 나중에 다시 방문해 보세요</p>
+            {% for review in place_reviews %}
+            <div class="place-review">
+              <span class="place-name">{{ review.place.name }}</span>
+              <form method="POST" action="{% url 'journeys:like_place' review.place.id %}">
+                {% csrf_token %}
+                {% if review.place in request.user.userprofile.liked_places.all %}
+                <button class="mypick-btn" type="submit">⭐ 저장 취소</button>
+                {% else %}
+                <button class="mypick-btn" type="submit">⭐ 저장하기</button>
+                {% endif %}
+              </form>
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+      </div>
 
-
-    <br><br>
-    
-    <nav>
-        <a href="{% url 'journeys:main' %}">홈</a> |
-        <a href="{% url 'journeys:explore' %}">탐험</a> |
-        여정 |
-        <a href="{% url 'accounts:mypage' %}">마이</a>
-    </nav>
-</body>
+      <!-- 네비탭 -->
+      <div class="bottom_nav">
+        <a href="{% url 'journeys:main' %}" class="nav_item">
+          <img src="{% static 'assets/img/ic_home.svg' %}" alt="홈" />
+          <span class="unselected">홈</span>
+        </a>
+        <a href="{% url 'journeys:explore' %}" class="nav_item">
+          <img src="{% static 'assets/img/ic_search.svg' %}" alt="탐험" />
+          <span class="unselected">탐험</span>
+        </a>
+        <a href="{% url 'journeys:journey' %}" class="nav_item">
+          <img src="{% static 'assets/img/ic_journey_selected.svg' %}" alt="여정" />
+          <span class="selected">여정</span>
+        </a>
+        <a href="{% url 'accounts:mypage' %}" class="nav_item">
+          <img src="{% static 'assets/img/ic_mypage.svg' %}" alt="마이" />
+          <span class="unselected">마이</span>
+        </a>
+      </div>
+    </div>
+    <script src="{% static 'assets/js/routeRecord.js' %}"></script>
+  </body>
 </html>

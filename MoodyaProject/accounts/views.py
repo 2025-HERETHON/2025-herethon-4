@@ -126,19 +126,23 @@ def region_setup(request):
 def mypage(request):
     user = request.user
 
-    try:
-        profile = UserProfile.objects.get(user=user)
-    except UserProfile.DoesNotExist:
-        profile = UserProfile.objects.create(user=user)
+    # 프로필 가져오거나 새로 생성
+    profile, _ = UserProfile.objects.get_or_create(user=user)
 
+    # 가입 후 경과일 계산
     today = timezone.localdate()
     joined_day = timezone.localdate(user.date_joined)
     days = (today - joined_day).days + 1
 
+    # 저장한 장소들 가져오기
+    liked_places = profile.liked_places.all() if hasattr(profile, 'liked_places') else []
+
     context = {
         'days': days,
         'profile': profile,
+        'liked_places': liked_places
     }
+
     return render(request, 'accounts/mypage.html', context)
 
 # next URL helper

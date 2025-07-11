@@ -55,52 +55,57 @@
             </div>
           </div>
         </div>
+        
         <div class="save_places">
           <h3>저장한 장소들</h3>
-          <div class="no_place">
-            <div class="map_img">🗺️</div>
-            <p class="noplace">아직 저장된 장소가 없어요</p>
-            <p class="letssave">
-              여정을 완료하고 마음에 든 장소를 저장해보세요!
-            </p>
-          </div>
-          <div class="yes_places">
-            <div class="place_info">
-              <div class="place_name">연남동 연트럴파크</div>
-              <div class="visited"><span>7/7</span> 방문 코스</div>
+
+          {% if liked_places %}
+            <div class="yes_places">
+              {% for place in liked_places %}
+                <div class="place_info">
+                  <div class="place_name">{{ place.name }}</div>
+                  <div class="visited"><span>{{ place.visited_date|date:"m/d" }}</span> 방문 코스</div>
+                  {# 만약 visited_date 필드가 없다면 위 줄은 제거해도 됩니다 #}
+                </div>
+              {% endfor %}
             </div>
-            <div class="place_info">
-              <div class="place_name">북촌 한옥마을</div>
-              <div class="visited"><span>7/5</span> 방문 코스</div>
+          {% else %}
+            <div class="no_place">
+              <div class="map_img">🗺️</div>
+              <p class="noplace">아직 저장된 장소가 없어요</p>
+              <p class="letssave">
+                여정을 완료하고 마음에 든 장소를 저장해보세요!
+              </p>
             </div>
-          </div>
+          {% endif %}
+          
         </div>
         <form method="POST" action="{% url 'accounts:logout' %}">
           {% csrf_token %}
-          <button class="logout">로그아웃하기</button>
-        </form>
-
+            <button class="logout">로그아웃하기</button>
+          </form>
         <!-- 네비탭 -->
         <div class="bottom_nav">
-          <a href="home.html" class="nav_item">
+          <a href="{% url 'journeys:main' %}" class="nav_item">
             <img src="{% static 'assets/img/ic_home.svg' %}" alt="ic_home_selected" />
             <span class="unselected">홈</span>
           </a>
-          <a href="suggestCourse.html" class="nav_item">
+          <a href="{% url 'journeys:explore' %}" class="nav_item">
             <img src="{% static 'assets/img/ic_search.svg' %}" alt="ic_search" />
             <span class="unselected">탐험</span>
           </a>
           <!-- 여정 추가예정 -->
-          <a href="routeRecord.html" class="nav_item">
+          <a href="{% url 'journeys:journey' %}"class="nav_item">
             <img src="{% static 'assets/img/ic_journey.svg' %}" alt="ic_journey" />
             <span class="unselected">여정</span>
           </a>
-          <a href="mypage.html" class="nav_item">
+          <a href="{% url 'accounts:mypage' %}" class="nav_item">
             <img src="{% static 'assets/img/ic_mypage_selected.svg' %}" alt="ic_mypage" />
             <span class="selected">마이</span>
           </a>
         </div>
-      </div>
+
+      
     </div>
     <script src="{% static 'assets/js/mypage.js' %}"></script>
   </body>

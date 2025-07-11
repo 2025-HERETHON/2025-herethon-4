@@ -178,6 +178,7 @@
 
 /* 마음에 든 장소 저장 */
 .my-pick h3 {
+  margin-top: 4px;
   margin-bottom: 4px;
   line-height: 1;
   color: #353e4b;

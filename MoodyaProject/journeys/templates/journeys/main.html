@@ -1,47 +1,121 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="kr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>{{ request.user.username }}님 안녕하세요!</h1>
-    <p>오늘은 어떤 여정을 떠나볼까요?</p>
-    <a href="">+ 새로운 여정 시작하기</a>
-
-    <hr>
-
-    <h3>추천 장소</h3>
-    <a href="{% url 'journeys:explore' %}">더보기→</a>
-    {% for place in places %}
-        <div>
-            <h3><a href="{% url 'journeys:create_place_review' place.id %}">{{ place.emoji }} {{ place.name }}</a></h3>
-            <p>{{ place.get_category_display }} | {{ place.tags }}</p>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/section/home.css' %}" />
+    <title>MOODYA Home</title>
+  </head>
+  <body>
+    <div id="wrap" class="container">
+      <div class="box">
+        <!-- 인사말 -->
+        <div class="hello">
+          <div class="hello_top">
+            <div class="hello_text">
+              <h2>안녕하세요!</h2>
+              <p>오늘은 어떤 여정을 떠나볼까요?</p>
+            </div>
+            <div class="hello_img">
+              <img src="{% static 'assets/img/img_hello.svg' %}" alt="img_hello" />
+            </div>
+          </div>
+          <div class="hello_bottom">
+            <a href="{% url 'journeys:explore' %}">
+              <button>+ 새로운 여정 시작하기</button>
+            </a>
+          </div>
         </div>
-    {% empty %}
-        <p>추천 장소가 없어요.</p>
-    {% endfor %}
 
-    <hr>
+        <!-- 배너 -->
+        <div class="feellike">
+          <img src="{% static 'assets/img/img_banner.svg' %}" alt="img_banner">
+        </div>
 
-    <h2>최근 다녀온 장소</h2>
-    {% for place_review in place_reviews %}
-        <h3>{{ place_review.place.name }}</h3>
-        <p>{{ place_review.created_at|timesince }} 전</p>
-        <p>{{ place_review.place.get_region_display }}</p>
-        <p>⭐{{ place_review.rating|floatformat:1 }} {{ place_review.comment }}</p>
-    {% empty %}
-        <p>방문 기록이 없어요.</p>
-    {% endfor %}
+        <!-- 추천 장소 -->
+        <div class="suggest">
+          <div class="suggest_text">
+            <h3>추천 장소</h3>
+            <div class="more" onclick="window.location.href='{% url 'journeys:explore' %}'">
+              <div class="more_text">더보기</div>
+              <div class="more_icon">
+                <img src="{% static 'assets/img/ic_rightarrow.svg' %}" alt="ic_rightarrow" />
+              </div>
+            </div>
+          </div>
+          <div class="suggest_list">
+            {% for place in places %}
+              <div class="suggest_item">
+                <div class="suggest_img">
+                  <div class="emoji">{{ place.emoji }}</div>
+                </div>
+                <div class="course_name">{{ place.name }}</div>
+                <div class="purple_tag">{{ place.get_category_display }}</div>
+              </div>
+            {% empty %}
+              <div class="no_suggest">
+                <div class="pin">📍</div>
+                <p class="nosuggest">추천 장소가 없어요.</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
 
-    <br><br>
+        <!-- 최근 여정 -->
+        <div class="recents">
+          <h3>최근 여정</h3>
+          {% for place_review in place_reviews %}
+            <div class="recent">
+              <div class="recent_top">
+                <div class="blue_tag">{{ place_review.place.get_emotion_display }}</div>
+                <div class="day_after">{{ place_review.created_at|timesince }} 전</div>
+              </div>
+              <div class="recent_middle">
+                <h3>{{ place_review.place.name }}</h3>
+                <div class="region">{{ place_review.place.get_region_display }}</div>
+              </div>
+              <div class="recent_bottom">
+                <div class="review">
+                  <div class="review_img">
+                    <img src="{% static 'assets/img/ic_star.svg' %}" alt="ic_star" />
+                  </div>
+                  <div class="review_num">{{ place_review.rating|floatformat:1 }}</div>
+                </div>
+                <div class="review_content">{{ place_review.comment }}</div>
+              </div>
+            </div>
+          {% empty %}
+            <div class="no_journey">
+                <div class="pin">📍</div>
+                <p class="nojourney">최근에 마친 여정이 없어요.</p>
+                <p class="lookhere">여정을 마치면, 여기서 확인할 수 있어요!</p>
+              </div>
+          {% endfor %}
+        </div>
 
-    <nav>
-        홈 |
-        <a href="{% url 'journeys:explore' %}">탐험</a> |
-        <a href="{% url 'journeys:journey' %}">여정</a> |
-        <a href="{% url 'accounts:mypage' %}">마이</a>
-    </nav>
-</body>
+        <!-- 네비게이션 -->
+        <div class="bottom_nav">
+          <a href="{% url 'home' %}" class="nav_item">
+            <img src="{% static 'assets/img/ic_home_selected.svg' %}" alt="ic_home_selected" />
+            <span class="selected">홈</span>
+          </a>
+          <a href="{% url 'journeys:explore' %}" class="nav_item">
+            <img src="{% static 'assets/img/ic_search.svg' %}" alt="ic_search" />
+            <span class="unselected">탐험</span>
+          </a>
+          <a href="{% url 'journeys:journey' %}" class="nav_item">
+            <img src="{% static 'assets/img/ic_journey.svg' %}" alt="ic_journey" />
+            <span class="unselected">여정</span>
+          </a>
+          <a href="{% url 'accounts:mypage' %}" class="nav_item">
+            <img src="{% static 'assets/img/ic_mypage.svg' %}" alt="ic_mypage" />
+            <span class="unselected">마이</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
