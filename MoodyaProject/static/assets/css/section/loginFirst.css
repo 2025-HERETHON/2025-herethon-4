@@ -1,0 +1,128 @@
+.container {
+  position: relative;
+}
+.box {
+  position: absolute;
+  padding: 0 23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  margin-top: 59px;
+}
+#backBtn {
+  width: 6.585px;
+  height: 12.978px;
+  cursor: pointer;
+}
+
+/* 회원가입 중 상단 상태바  */
+
+.top-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 13px;
+}
+
+/* 상단 멘트 */
+
+.intro-ment {
+  box-sizing: border-box;
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+#first-ment {
+  color: #353e4b;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+#second-ment {
+  color: #5d6673;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+/* 선택하기 */
+form {
+  display: block;
+  width: auto;
+  max-height: 70vh;
+}
+.click-wrap {
+  margin-top: 30px;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+.click-box {
+  width: 337px;
+  height: 104px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  border: 2px solid #e8e9ed;
+  background: #fff;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 17px;
+  margin: 10px 0;
+  padding: 28px 23px;
+}
+
+.click-box:hover {
+  border: 2px solid #b166f8;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.clicked {
+  border: 2px solid #b166f8;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.emoji {
+  display: inline-block;
+  font-size: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #f4eaff;
+  text-align: center;
+  line-height: 48px;
+}
+
+.state {
+  color: #353e4b;
+  font-family: Pretendard;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 5px;
+}
+
+.descript {
+  color: #5d6673;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.common-btn {
+  box-sizing: border-box;
+  position: absolute;
+  margin-top: 25px;
+}
+

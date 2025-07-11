@@ -19,13 +19,13 @@
 
           <div class="start-emotion">
             <span class="label">시작 감정</span>
-            <span class="emotion">😰불안해요</span>
+            <span class="emotion">{{ journey.get_emotion_display }}</span>
           </div>
 
           <div class="suggest-course">
             <span class="label">추천 코스</span>
             <div class="where-course">
-              <span class="region">서북권</span>
+              <span class="region">{{ journey.get_region_display }}</span>
               <span class="course-type">힐링 코스</span>
             </div>
           </div>
@@ -38,20 +38,16 @@
           </div>
 
           <div class="place-review">
-            <span class="place-name">연남동 연트럴파크</span>
-            <span class="feeling-badge">평온해요</span>
+            <span class="place-name">{{ review.place.name }}</span>
+            <span class="feeling-badge">{{ review.get_emotion_display }}</span>
           </div>
-          <p class="feeling-ment">
-            → 공원에서 자연을 바라보니 마음이 차분해졌어요
-          </p>
+          <p class="feeling-ment">→ {{ review.comment }}</p>
 
           <div class="place-review">
-            <span class="place-name">테일러커피 연남점</span>
-            <span class="feeling-badge">평온해요</span>
+            <span class="place-name">{{ review.place.name }}</span>
+            <span class="feeling-badge">{{ review.get_emotion_display }}</span>
           </div>
-          <p class="feeling-ment">
-            → 차분해진 마음으로 맛있는 커피 한 잔 먹고 생각을 정리했어요
-          </p>
+          <p class="feeling-ment">→ {{ review.comment }}</p>
         </section>
 
         <!-- 오늘의 회고 -->
@@ -74,11 +70,11 @@
             <p>마음에 든 장소를 저장해서 나중에 다시 방문해 보세요</p>
 
             <div class="place-review">
-              <span class="place-name">연남동 연트럴파크</span>
+              <span class="place-name">{{ review.place.name }}</span>
               <button class="mypick-btn">⭐저장하기</button>
             </div>
             <div class="place-review">
-              <span class="place-name">테일러커피 연남점</span>
+              <span class="place-name">{{ review.place.name }}</span>
               <button class="mypick-btn">⭐저장하기</button>
             </div>
           </div>
@@ -96,7 +92,7 @@
         </a>
         <!-- 여정 추가예정 -->
         <a href="routeRecord.html" class="nav_item">
-          <img src="../assets/img/map-now.svg" alt="ic_journey" />
+          <img src="../assets/img/ic_journey_selected.svg" alt="ic_journey" />
           <span class="selected">여정</span>
         </a>
         <a href="mypage.html" class="nav_item">

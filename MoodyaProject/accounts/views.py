@@ -63,40 +63,59 @@ def logout(request):
 @login_required
 def emotion_setup(request):
     profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    
     if request.method == 'POST':
-        form = EmotionForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
+        selected_emotion = request.POST.get('emotion')
+        if selected_emotion:
+            profile.emotion = selected_emotion
+            profile.save()
             return redirect(get_next_url(request, 'accounts:activity_level_setup'))
-    else:
-        form = EmotionForm(instance=profile)
-    return render(request, 'accounts/emotion_setup.html', {'form': form, 'next': request.GET.get('next')})
+        else:
+            # 아무 것도 선택 안 한 경우
+            return render(request, 'accounts/emotion_setup.html', {
+                'error': '감정을 선택해 주세요.',
+                'next': request.GET.get('next')
+            })
+
+    return render(request, 'accounts/emotion_setup.html', {
+        'next': request.GET.get('next')
+    })
+
 
 # 활동 수준 선택
 @login_required
 def activity_level_setup(request):
     profile, _ = UserProfile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
-        form = ActivityLevelForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
+        activity_level = request.POST.get('activity_level')
+        if activity_level:
+            profile.activity_level = activity_level
+            profile.save()
             return redirect(get_next_url(request, 'accounts:region_setup'))
+        else:
+            error = "활동 수준을 선택해주세요."
+            return render(request, 'accounts/activity_level.html', {'error': error})
     else:
-        form = ActivityLevelForm(instance=profile)
-    return render(request, 'accounts/activity_level.html', {'form': form, 'next': request.GET.get('next')})
+        # GET 요청 시 폼 필드값 세팅해 줄 수도 있음
+        return render(request, 'accounts/activity_level.html')
 
 # 지역 선택
 @login_required
 def region_setup(request):
     profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
     if request.method == 'POST':
-        form = RegionForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect(get_next_url(request, 'journeys:main'))
-    else:
-        form = RegionForm(instance=profile)
-    return render(request, 'accounts/region_setup.html', {'form': form, 'next': request.GET.get('next')})
+        region = request.POST.get('region')
+        if region:
+            profile.region = region
+            profile.save()
+            return redirect('journeys:main')  # 또는 원하는 다음 페이지 URL 네임
+        else:
+            error = "지역을 선택해주세요."
+            return render(request, 'accounts/region_setup.html', {'error': error})
+
+    # GET 요청 시 기존 저장값 넘기기
+    return render(request, 'accounts/region_setup.html', {'profile': profile})
 
 # 마이페이지
 @login_required

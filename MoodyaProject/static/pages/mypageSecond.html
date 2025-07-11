@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/section/loginSecond.css" />
+    <link rel="stylesheet" href="../assets/css/section/mypageSecond.css" />
     <title>MOODYA Sign Up</title>
     <!-- 회원가입 단계 중 활동 역량 확인 페이지 입니다. -->
   </head>
@@ -12,12 +12,9 @@
     <div id="wrap" class="container">
       <div class="box">
         <div class="top-box">
-          <a href="loginFirst.html" id="backBtn">
-            <img src="../assets/images/backBtn.svg" alt="backBtn" />
+          <a href="mypage.html" id="backBtn">
+            <img src="../assets/img/backBtn.svg" alt="backBtn" />
           </a>
-          <div class="fill-line"></div>
-          <div class="fill-line"></div>
-          <div class="empty-line"></div>
         </div>
         <div class="intro-ment">
           <p id="first-ment">혼자 외출이 어느 정도 편하신가요?</p>
@@ -25,10 +22,10 @@
         </div>
 
         <!-- 역량 확인 -->
-        <form action="loginThird.html" method="get">
+        <form action="mypage.html" method="get" id="settingForm">
           <div class="click-wrap">
             <label class="click-box">
-              <input type="radio" name="emotion" value="초급" hidden />
+              <input type="radio" name="activity" value="초급" hidden />
               <div class="emoji">☕️</div>
               <div class="descript-box">
                 <p class="state">초급</p>
@@ -41,7 +38,7 @@
               </div>
             </label>
             <label class="click-box">
-              <input type="radio" name="emotion" value="중급" hidden />
+              <input type="radio" name="activity" value="중급" hidden />
               <div class="emoji">📚</div>
               <div class="descript-box">
                 <p class="state">중급</p>
@@ -56,7 +53,7 @@
               </div>
             </label>
             <label class="click-box">
-              <input type="radio" name="emotion" value="상급" hidden />
+              <input type="radio" name="activity" value="상급" hidden />
               <div class="emoji">🎯️</div>
               <div class="descript-box">
                 <p class="state">상급</p>
@@ -72,6 +69,6 @@
         </form>
       </div>
     </div>
-    <script src="../assets/js/login.js"></script>
+    <script src="../assets/js/mysetting.js"></script>
   </body>
 </html>
