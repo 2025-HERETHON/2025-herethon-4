@@ -20,7 +20,7 @@
             <h2>오늘의 탐험</h2>
           </div>
           <p class="state-option">
-            <span>서북권</span>
+            <span>{{ request.user.userprofile.get_region_display }}</span>
             <span>힐링 코스를 따라 여정을 기록해 보아요</span>
           </p>
         </header>
@@ -38,19 +38,19 @@
         <section class="suggest-list">
           <div class="place-card">
             <div class="place-top">
-              <div class="emoji">🌳</div>
+              <div class="emoji">{{ place.emoji }}</div>
               <div class="tag-set">
-                <span class="num-tag">1</span>
-                <span class="tag">자연힐링</span>
+                <span class="num-tag">{{ forloop.counter }}</span>
+                <span class="tag">{{ place.tags }}</span>
               </div>
             </div>
 
             <div class="place-info">
               <div class="place-title">
-                <h3>연남동 연트럴 파크</h3>
+                <h3>{{ place.name }}</h3>
                 <div class="review-btn">리뷰 작성하기</div>
               </div>
-              <p class="oneline-sum">조용한 산책로, 혼자 앉아 쉬기 좋음</p>
+              <p class="oneline-sum">{{ place.summary }}</p>
 
               <div class="location">
                 <img
@@ -58,7 +58,7 @@
                   alt="위치"
                   class="location_icon"
                 />
-                <span class="location-content">서울시 마포구</span>
+                <span class="location-content">{{ place.address }}</span>
               </div>
               <div class="safty">
                 <img
@@ -67,7 +67,7 @@
                   class="safty-icon"
                 />
                 <span class="badge">여성 안전도</span>
-                <span class="percent">96%</span>
+                <span class="percent">{{ place.safety_score }}%</span>
               </div>
               <button class="record-btn">
                 <span>이 곳에서의 여정 기록하기</span>
@@ -77,19 +77,19 @@
 
           <div class="place-card">
             <div class="place-top">
-              <div class="emoji">☕</div>
+              <div class="emoji">{{ place.emoji }}</div>
               <div class="tag-set">
-                <span class="num-tag">2</span>
-                <span class="tag">카페 투어</span>
+                <span class="num-tag">{{ forloop.counter }}</span>
+                <span class="tag">{{ place.tags }}</span>
               </div>
             </div>
 
             <div class="place-info">
               <div class="place-title">
-                <h3>테일러 커피 연남점</h3>
+                <h3>{{ place.name }}</h3>
                 <div class="review-btn">리뷰 작성하기</div>
               </div>
-              <p class="oneline-sum">혼자 산책하기 좋은 안전한 도심 속 자연</p>
+              <p class="oneline-sum">{{ place.summary }}</p>
 
               <div class="location">
                 <img
@@ -97,7 +97,7 @@
                   alt="위치"
                   class="location_icon"
                 />
-                <span class="location-content">서울시 마포구</span>
+                <span class="location-content">{{ place.address }}</span>
               </div>
               <div class="safty">
                 <img
@@ -106,7 +106,7 @@
                   class="safty-icon"
                 />
                 <span class="badge">여성 안전도</span>
-                <span class="percent">96%</span>
+                <span class="percent">{{ place.safety_score }}%</span>
               </div>
               <button class="record-btn">
                 <span>이 곳에서의 여정 기록하기</span>
