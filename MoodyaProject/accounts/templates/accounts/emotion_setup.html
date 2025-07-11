@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/section/loginFirst.css' %}" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'assets/favicon.ico' %}" />
+    <title>MOODYA Login</title>
+    <!-- 회원가입 단계 중 감정확인 페이지 입니다. -->
+  </head>
+  <body>
+    <div id="wrap" class="container">
+      <div class="box">
+        <div class="top-box">
+          <a href="{% url 'accounts:login' %}" id="backBtn">
+            <img src="{% static 'assets/img/backBtn.svg' %}" alt="backBtn" />
+          </a>
+
+          <div class="fill-line"></div>
+          <div class="empty-line"></div>
+          <div class="empty-line"></div>
+        </div>
+        <div class="intro-ment">
+          <p id="first-ment">오늘 기분 어때요?</p>
+          <p id="second-ment">당신의 감정에 맞는 완벽한 장소를 찾아드릴게요</p>
+        </div>
+        <!-- 감정선택 -->
+        <form action="{% url 'accounts:emotion_setup' %}" method="POST">
+          {% csrf_token %}
+          <div class="click-wrap">
+            <label class="click-box">
+              <input type="radio" name="emotion" value="ANXIOUS" hidden />
+              <div class="emoji">😰</div>
+              <div class="descript-box">
+                <p class="state">불안해요</p>
+                <p class="descript">마음이 복잡하고 진정이 필요해요</p>
+              </div>
+            </label>
+            <label class="click-box">
+              <input type="radio" name="emotion" value="EXCITED" hidden />
+              <div class="emoji">😊</div>
+              <div class="descript-box">
+                <p class="state">설레요</p>
+                <p class="descript">새로운 경험을 해보고 싶어요</p>
+              </div>
+            </label>
+            <label class="click-box">
+              <input type="radio" name="emotion" value="ENERGETIC" hidden />
+              <div class="emoji">😎</div>
+              <div class="descript-box">
+                <p class="state">활기차요</p>
+                <p class="descript">에너지가 넘치고 활동적이에요</p>
+              </div>
+            </label>
+            <label class="click-box">
+              <input type="radio" name="emotion" value="TIRED" hidden />
+              <div class="emoji">😮‍💨</div>
+              <div class="descript-box">
+                <p class="state">지쳤어요</p>
+                <p class="descript">아무것도 하고 싶지 않아요</p>
+              </div>
+            </label>
+            <label class="click-box">
+              <input type="radio" name="emotion" value="CALM" hidden />
+              <div class="emoji">😌</div>
+              <div class="descript-box">
+                <p class="state">평온해요</p>
+                <p class="descript">조용한 시간이 필요해요</p>
+              </div>
+            </label>
+            <label class="click-box">
+              <input type="radio" name="emotion" value="ANGRY" hidden />
+              <div class="emoji">😤 </div>
+              <div class="descript-box">
+                <p class="state">화나요</p>
+                <p class="descript"> 갑자기 분노가 치밀어 올라요</p>
+              </div>
+            </label>
+          </div>
+          <button class="common-btn">다음</button>
+        </form>
+      </div>
+    </div>
+    <script src="{% static 'assets/js/login.js' %}"></script>
+  </body>
+</html>

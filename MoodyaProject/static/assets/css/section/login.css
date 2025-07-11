@@ -1,0 +1,104 @@
+.container {
+  position: relative;
+}
+.box {
+  position: absolute;
+  padding: 0 23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  margin-top: 59px;
+  width: 100%;
+}
+#backBtn {
+  width: 6.585px;
+  height: 12.978px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+/* 상단 멘트 */
+
+.intro-ment {
+  box-sizing: border-box;
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+#first-ment {
+  color: #353e4b;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+#second-ment {
+  color: #5d6673;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+/* 로그인하기 */
+#input-content {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 50px;
+}
+.input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+label {
+  color: #353e4b;
+  font-family: Pretendard;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+input {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px;
+  align-items: center;
+  width: 337px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  border: 2px solid #e8e9ed;
+  background: #fff;
+}
+
+.common-btn {
+  box-sizing: border-box;
+  position: absolute;
+  margin-top: 50.2px;
+}
+
+#goto-signup {
+  color: #9334e9;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: 113px;
+}
+
+#signup-link {
+  border-bottom: 1px solid #9334e9;
+}
