@@ -50,7 +50,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateStars(rating) {
     stars.forEach((star, i) => {
       star.src =
-        i < rating ? "../img/star-full.svg" : "../img/star-outline2.svg";
+        i < rating
+          ? "../assets/img/star-full.svg"
+          : "../assets/img/star-outline2.svg";
     });
   }
 
