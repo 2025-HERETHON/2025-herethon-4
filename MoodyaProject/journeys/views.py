@@ -32,7 +32,7 @@ def main(request):
             region=profile.region
         )
         .exclude(id__in=reviewed_place_ids)
-        .order_by('id')[:3]
+        .order_by('id')[:2]
     )
 
     # 현재 여정에 속한 리뷰만, 최신순으로 가져오기
