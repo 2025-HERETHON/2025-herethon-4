@@ -7,19 +7,19 @@ document.addEventListener("DOMContentLoaded", function () {
       clickBoxes.forEach((b) => {
         b.classList.remove("clicked");
 
-        const img = b.querySelector(".checkImage");
-        if (img) {
-          img.src = "../assets/img/none-checkBtn.svg";
-        }
+        // const img = b.querySelector(".checkImage");
+        // if (img) {
+        //   img.src = "../assets/img/none-checkBtn.svg";
+        // }
       });
 
       // 현재 박스 클릭 처리
       box.classList.add("clicked");
 
-      const checkImg = box.querySelector(".checkImage");
-      if (checkImg) {
-        checkImg.src = "{% static 'assets/img/checkBtn.svg' %}";
-      }
+      // const checkImg = box.querySelector(".checkImage");
+      // if (checkImg) {
+      //   checkImg.src = "../assets/img/checkBtn.svg";
+      // }
     });
   });
 });
