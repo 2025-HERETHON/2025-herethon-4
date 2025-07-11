@@ -30,3 +30,6 @@ urlpatterns = [
     path('journeys/', include('journeys.urls')),  
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.BASE_DIR / 'static')
