@@ -21,7 +21,7 @@ def main(request):
     # 현재 여정에서 리뷰한 장소 ID만 추출
     reviewed_place_ids = []
     if journey:
-        reviewed_place_ids = PlaceReview.objects.filter(journey=journey).values_list('place_id', flat=True)
+        reviewed_place_ids = PlaceReview.objects.filter(journey=journey).values_list('place_id', flat=True).order_by('id')
 
     # 추천 장소 (사용자 상태에 맞고, 아직 리뷰하지 않은 곳만)
     places = (
@@ -32,7 +32,7 @@ def main(request):
             region=profile.region
         )
         .exclude(id__in=reviewed_place_ids)
-        .order_by('id')[:3]
+        .order_by('id')[:2]
     )
 
     # 현재 여정에 속한 리뷰만, 최신순으로 가져오기

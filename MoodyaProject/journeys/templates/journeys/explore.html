@@ -1,57 +1,126 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>코스 탐험하기</title>
-</head>
-<body>
-    <a href="{% url 'journeys:main' %}">←</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/section/suggestCourse.css' %}?v=20250711" />
+    <!-- <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" /> -->
+    <title>MOODYA Suggest Course</title>
+  </head>
+  <body>
+    <div id="wrap" class="container">
+      <div class="suggest-page">
+        <header class="suggest-header">
+          <div class="top-left">
+            <a href="{% url 'journeys:main' %}">
+              <img src="{% static 'assets/img/back_icon.svg' %}" alt="뒤로 가기" class="back-icon" />
+            </a>
+          </div>
+          <div class="top-right">
+            <h2>오늘의 탐험</h2>
+            <p class="state-option">
+                <span>{{ request.user.userprofile.get_region_display }}</span>
+                <span>힐링 코스를 따라 여정을 기록해 보아요</span>
+            </p>
+          </div>
+        </header>
 
-    <h2>코스 탐험하기</h2>
-    <p>{{ request.user.userprofile.get_region_display }} 힐링 코스를 따라 여정을 기록해보아요</p>
-    <p>진행 상황: {{ completed_count }}/{{ total_count }} 완료 ({{ progress_percent }}%)</p>
+        <div class="progress-status">
+          <div class="progress-top">
+            <span class="progress-label">진행 상황</span>
+            <span class="progress-count">{{ completed_count }}/{{ total_count }} 완료</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" style="width: {{ progress_percent }}%;"></div>
+          </div>
+        </div>
 
+        <section class="suggest-list">
+          {% for place in unreviewed_places %}
+            <div class="place-card">
+              <div class="place-top">
+                <div class="emoji">{{ place.emoji }}</div>
+                <div class="tag-set">
+                  <span class="num-tag">{{ forloop.counter }}</span>
+                  <span class="tag">{{ place.tags }}</span>
+                </div>
+              </div>
+              <div class="place-info">
+                <div class="place-title">
+                  <h3>{{ place.name }}</h3>
+                </div>
+                <p class="oneline-sum">{{ place.summary }}</p>
+                <div class="location">
+                  <img src="{% static 'assets/img/placemark.svg' %}" alt="위치" class="location_icon" />
+                  <span class="location-content">{{ place.address }}</span>
+                </div>
+                <div class="safty">
+                  <img src="{% static 'assets/img/safety.svg' %}" alt="여성 안전도" class="safty-icon" />
+                  <span class="badge">여성 안전도</span>
+                  <span class="percent">{{ place.safety_score }}%</span>
+                </div>
+                <a href="{% url 'journeys:create_place_review' place.id %}">
+                  <button class="record-btn">이 곳에서의 여정 기록하기</button>
+                </a>
+              </div>
+            </div>
+          {% endfor %}
 
-    <hr>
+          {% for place in reviewed_places %}
+            <div class="place-card reviewed">
+              <div class="place-top">
+                <div class="emoji">{{ place.emoji }}</div>
+                <div class="tag-set">
+                  <!-- <span class="num-tag">{{ forloop.counter }}</span> -->
+                  <span class="tag">{{ place.tags }}</span>
+                </div>
+              </div>
+              <div class="place-info">
+                <div class="place-title">
+                  <h3>{{ place.name }}</h3>
+                </div>
+                <p class="oneline-sum">{{ place.summary }}</p>
+                <div class="location">
+                  <img src="{% static 'assets/img/placemark.svg' %}" alt="위치" class="location_icon" />
+                  <span class="location-content">{{ place.address }}</span>
+                </div>
+                <div class="safty">
+                  <img src="{% static 'assets/img/safety.svg' %}" alt="여성 안전도" class="safty-icon" />
+                  <span class="badge">여성 안전도</span>
+                  <span class="percent">{{ place.safety_score }}%</span>
+                </div>
+                <button class="record-btn" disabled>기록 완료</button>
+              </div>
+            </div>
+          {% endfor %}
 
+          {% if not unreviewed_places and not reviewed_places %}
+            <p class="no-places">조건에 맞는 장소가 없어요😥</p>
+          {% endif %}
+        </section>
 
-<!-- ✅ 기록 안 된 장소 먼저 보여주기 -->
-{% if unreviewed_places %}
-    {% for place in unreviewed_places %}
-        <h4>{{ place.emoji }} {{ place.name }}</h4>
-        <p>{{ place.summary }}</p>
-        <p>📍 {{ place.address }}</p>
-        <p>✅ 여성 안전도: {{ place.safety_score }}%</p>
-        <a href="{% url 'journeys:create_place_review' place.id %}">이 곳에서의 여정 기록하기</a>
-        <hr>
-    {% endfor %}
-{% endif %}
-
-<!-- ✅ 이미 기록한 장소 아래에 표시 -->
-{% if reviewed_places %}
-    {% for place in reviewed_places %}
-        <h4>{{ place.emoji }} {{ place.name }}</h4>
-        <p>{{ place.summary }}</p>
-        <p>📍 {{ place.address }}</p>
-        <p>✅ 여성 안전도: {{ place.safety_score }}%</p>
-        <p>기록 완료</p>
-        <hr>
-    {% endfor %}
-{% endif %}
-
-<!-- 아무 장소도 없을 때 -->
-{% if not unreviewed_places and not reviewed_places %}
-    <p>조건에 맞는 장소가 없어요😥</p>
-{% endif %}
-
-    <br><br>
-
-    <nav>
-        <a href="{% url 'journeys:main' %}">홈</a> |
-        탐험 |
-        <a href="{% url 'journeys:journey' %}">여정</a> |
-        <a href="{% url 'accounts:mypage' %}">마이</a>
-    </nav>
-</body>
+        <div class="bottom_nav">
+          <a href="{% url 'journeys:main' %}" class="nav_item">
+            <img src="{% static 'assets/img/ic_home.svg' %}" alt="ic_home" />
+            <span class="unselected">홈</span>
+          </a>
+          <a href="{% url 'journeys:explore' %}" class="nav_item">
+            <img src="{% static 'assets/img/search_now.svg' %}" alt="ic_search" />
+            <span class="selected">탐험</span>
+          </a>
+          <a href="{% url 'journeys:journey' %}" class="nav_item">
+            <img src="{% static 'assets/img/ic_journey.svg' %}" alt="ic_journey" />
+            <span class="unselected">여정</span>
+          </a>
+          <a href="{% url 'accounts:mypage' %}" class="nav_item">
+            <img src="{% static 'assets/img/ic_mypage.svg' %}" alt="ic_mypage" />
+            <span class="unselected">마이</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'assets/js/suggestCourse.js' %}"></script>
+  </body>
 </html>

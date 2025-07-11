@@ -109,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const recordButton = currentCard.querySelector(".record-btn");
     recordButton.classList.add("completed");
     recordButton.textContent = "기록 완료됨";
+    recordButton.disabled = true;
 
     modal.classList.add("hidden");
     modal.style.display = "none";
