@@ -373,6 +373,11 @@ header h2 {
   z-index: 999;
 } */
 
+/* 
+.modal.hidden {
+  display: none;
+} */
+
 .modal {
   position: fixed;
   top: 0;
@@ -386,8 +391,221 @@ header h2 {
   z-index: 100;
 }
 
-.modal.hidden {
-  display: none;
+.modal-content {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  width: 80%;
+  max-width: 350px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.modal-content h3 {
+  line-height: 1.2;
+  font-size: 17px;
+  color: black;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: -10px;
+}
+
+.close-btn {
+  float: right;
+  line-height: 1.2;
+  color: black;
+  width: 24px;
+  margin-top: -5px;
+  cursor: pointer;
+}
+
+.region {
+  line-height: 1.8;
+  color: #5d6673;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.rating-section {
+  border-top: 1px solid #e8e9ed;
+  padding-top: 10px;
+}
+
+.rating-label {
+  line-height: 1.6;
+  font-weight: 600;
+  color: black;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.stars {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+  font-size: 28px;
+  justify-content: center;
+}
+
+.star {
+  transition: color 0.2s ease;
+  color: #ccc;
+  font-size: 28px;
+  width: 35px;
+  height: auto;
+  cursor: pointer;
+}
+
+.star:hover {
+  color: #facc15;
+}
+
+.dropdown {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0px 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 47px;
+  background-color: #fff;
+}
+
+.dropdown-selected {
+  flex-grow: 1; /* 텍스트가 너비를 다 차지하도록 */
+  font-size: 14px;
+  line-height: 1;
+  color: #888;
+  padding-left: 0px; /* 좌측 공백 제거 */
+  margin: 0; /* 혹시 모를 기본 마진 제거 */
+}
+
+.dropdown::after {
+  content: "▾";
+  font-size: 16px;
+  color: #333;
+}
+
+.dropdown-options {
+  position: absolute;
+  list-style-type: none;
+  /* width: 249px; */
+  top: 65%;
+  left: 0;
+  z-index: 10;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-height: 0;
+  overflow: hidden;
+  /* transition: max-height 0.2s ease-in-out; */
+}
+
+.dropdown-options.hidden {
+  max-height: 0;
+  overflow: hidden;
+  border: none;
+}
+
+.dropdown-options.show {
+  max-height: 300px;
+  overflow: auto;
+  border: 1px solid #ccc;
+  width: 100%;
+  padding-left: 0;
+}
+
+.dropdown-options li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  line-height: 2;
+  font-size: 14px;
+  color: black;
+}
+
+.dropdown-options li.selected {
+  background-color: #f3e8ff;
+  color: #adadad;
+}
+
+.review-section {
+  width: 100%;
+  padding: 15px 0 0;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  line-height: 1;
+}
+
+.review-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+#review-text {
+  width: 290px;
+  height: 121px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: none;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+.modal-footer {
+  text-align: center;
+  height: 39px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  background-color: #d3b9f5;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn.active {
+  background-color: #9334e9;
+  color: #fff;
+  cursor: pointer;
+}
+
+.submit-btn.active:hover {
+  background-color: #9334e9;
+}
+
+/* .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
 }
 
 .modal-content {
@@ -587,7 +805,7 @@ header h2 {
 
 .submit-btn.active:hover {
   background-color: #9334e9;
-}
+} */
 
 /* 바텀 네비게이션 바 */
 .bottom_nav {
