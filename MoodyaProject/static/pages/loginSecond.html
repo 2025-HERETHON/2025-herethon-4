@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/section/loginSecond.css" />
+    <title>MOODYA Sign Up</title>
+    <!-- 회원가입 단계 중 활동 역량 확인 페이지 입니다. -->
+  </head>
+  <body>
+    <div id="wrap" class="container">
+      <div class="box">
+        <div class="top-box">
+          <a href="loginFirst.html" id="backBtn">
+            <img src="../assets/img/backBtn.svg" alt="backBtn" />
+          </a>
+          <div class="fill-line"></div>
+          <div class="fill-line"></div>
+          <div class="empty-line"></div>
+        </div>
+        <div class="intro-ment">
+          <p id="first-ment">혼자 외출이 어느 정도 편하신가요?</p>
+          <p id="second-ment">어느 정도의 모험을 원하시나요?</p>
+        </div>
+
+        <!-- 역량 확인 -->
+        <form action="loginThird.html" method="get">
+          <div class="click-wrap">
+            <label class="click-box">
+              <input type="radio" name="emotion" value="초급" hidden />
+              <div class="emoji">☕️</div>
+              <div class="descript-box">
+                <p class="state">초급</p>
+                <p class="descript">혼자 외출이 아직 어색해요</p>
+                <div class="tag-group">
+                  <p class="tag">카페</p>
+                  <p class="tag">공원</p>
+                  <p class="tag">편안한 공간</p>
+                </div>
+              </div>
+            </label>
+            <label class="click-box">
+              <input type="radio" name="emotion" value="중급" hidden />
+              <div class="emoji">📚</div>
+              <div class="descript-box">
+                <p class="state">중급</p>
+                <p class="descript">
+                  가끔 혼자 나가지만<br />새로운 곳은 아직 망설여져요
+                </p>
+                <div class="tag-group">
+                  <p class="tag">전시관</p>
+                  <p class="tag">서점</p>
+                  <p class="tag">문화 공간</p>
+                </div>
+              </div>
+            </label>
+            <label class="click-box">
+              <input type="radio" name="emotion" value="상급" hidden />
+              <div class="emoji">🎯️</div>
+              <div class="descript-box">
+                <p class="state">상급</p>
+                <p class="descript">혼자서도 어디든 자신있게 갈 수 있어요</p>
+                <div class="tag-group">
+                  <p class="tag">새로운 동네</p>
+                  <p class="tag">액티비티 체험</p>
+                </div>
+              </div>
+            </label>
+          </div>
+          <button class="common-btn">다음</button>
+        </form>
+      </div>
+    </div>
+    <script src="../assets/js/login.js"></script>
+  </body>
+</html>

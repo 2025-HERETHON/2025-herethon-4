@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/section/login.css" />
+    <title>MOODYA Login</title>
+    <!-- 로그인 페이지 -->
+  </head>
+  <body>
+    <div id="wrap" class="container">
+      <div class="box">
+        <!-- 시작화면으로 이동 -->
+        <a href="../index.html" id="backBtn">
+          <img src="../assets/img/backBtn.svg" alt="backBtn" />
+        </a>
+        <div class="intro-ment">
+          <p id="first-ment">다시 만나서 반가워요</p>
+          <p id="second-ment">오늘은 어떤 힐링 여정을 떠나볼까요?</p>
+        </div>
+        <!-- 로그인 입력창 -->
+        <form action="home.html" method="get">
+          <div id="input-content">
+            <div class="input-box">
+              <label>이메일</label>
+              <input type="email" />
+            </div>
+            <div class="input-box">
+              <label>비밀번호</label>
+              <input type="password" />
+            </div>
+          </div>
+          <button class="common-btn">로그인</button>
+        </form>
+        <p id="goto-signup">
+          아직 계정이 없으신가요?
+          <a href="signUp.html" id="signup-link">회원가입하기</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
