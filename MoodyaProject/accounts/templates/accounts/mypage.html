@@ -1,84 +1,107 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <title>마이페이지</title>
-    <style>
-      body { font-family: sans-serif; padding: 2rem; }
-      h1   { font-size: 1.8rem; margin-bottom: .5rem; }
-      h2   { font-size: 1.2rem; margin-top: 2rem; }
-      .box { border: 1px solid #ccc; border-radius: 10px; padding: 1.5rem; max-width: 420px; }
-      .row { margin: .8rem 0; display: flex; justify-content: space-between; align-items: center; }
-      .btn { padding: .25rem .9rem; border-radius: 6px; border: none; background:#007aff; color:#fff;
-             font-size: .9rem; cursor:pointer; text-decoration:none; }
-    </style>
-</head>
-<body>
-
-  <h1>마이페이지</h1>
-  <p>MOODYA와 함께한 지 <strong>{{ days }}</strong>일째</p>
-
-  <h2>내 설정</h2>
-  <div class="box">
-      <div class="row">
-          <span>현재 감정: {{ profile.get_emotion_display }}</span>
-          <a class="btn"
-
-             href="{% url 'accounts:emotion_setup' %}?next={% url 'accounts:mypage' %}">
-
-             변경
-          </a>
-      </div>
-      <div class="row">
-          <span>활동 역량: {{ profile.get_activity_level_display }}</span>
-          <a class="btn"
-
-
-             href="{% url 'accounts:activity_level_setup' %}?next={% url 'accounts:mypage' %}">
-
-             변경
-          </a>
-      </div>
-      <div class="row">
-          <span>지역: {{ profile.get_region_display }}</span>
-          <a class="btn"
-
-             href="{% url 'accounts:region_setup' %}?next={% url 'accounts:mypage' %}">
-
-             변경
-          </a>
-      </div>
-  </div>
-
-  <div class="logout-box">
-
-      <form method="post" action="{% url 'accounts:logout' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/section/mypage.css' %}" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'assets/favicon.ico' %}" />
+    <title>MOODYA MyPage</title>
+  </head>
+  <body>
+    <div id="wrap" class="container">
+      <div class="box">
+        <div class="mypage_top">
+          <div class="top_left">
+            <img src="{% static 'assets/img/img_hello.svg' %}" alt="img_hello" />
+          </div>
+          <div class="top_right">
+            <h2>마이페이지</h2>
+            <p>
+              <span>MOODYA</span>와 함께한 지 <span class="day">{{days}}</span>일째
+            </p>
+          </div>
+        </div>
+        <div class="my_settings">
+          <h3>내 설정</h3>
+          <div class="setting_first">
+            <h3>현재 선호 감정</h3>
+            <p>추천에 반영되는 기본 감정</p>
+            <div class="setting_bottom">
+              <div class="blue_tag">{{ profile.get_emotion_display }}</div>
+              <a class="change" href="{% url 'accounts:mypageFirst' %}">변경</a>
+            </div>
+          </div>
+          <hr />
+          <div class="setting setting_second">
+            <h3>혼자 외출 레벨</h3>
+            <p>편안한 정도에 따른 장소 추천</p>
+            <div class="setting_bottom">
+              <div class="yellow_tag">{{ profile.get_activity_level_display }}</div>
+              <a class="change" href="{% url 'accounts:mypageSecond' %}">변경</a>
+            </div>
+          </div>
+          <hr />
+          <div class="setting setting_third">
+            <h3>선호 지역</h3>
+            <p>주로 가고 싶은 서울 권역</p>
+            <div class="setting_bottom">
+              <div class="green_tag">{{ profile.get_region_display }}</div>
+              <a class="change" href="{% url 'accounts:mypageThird' %}">변경</a>
+            </div>
+          </div>
+        </div>
+        <div class="save_places">
+          <h3>저장한 장소들</h3>
+          <div class="no_place">
+            <div class="map_img">🗺️</div>
+            <p class="noplace">아직 저장된 장소가 없어요</p>
+            <p class="letssave">
+              여정을 완료하고 마음에 든 장소를 저장해보세요!
+            </p>
+          </div>
+          <div class="yes_places">
+            <div class="place_info">
+              <div class="place_name">연남동 연트럴파크</div>
+              <div class="visited"><span>7/7</span> 방문 코스</div>
+            </div>
+            <div class="place_info">
+              <div class="place_name">북촌 한옥마을</div>
+              <div class="visited"><span>7/5</span> 방문 코스</div>
+            </div>
+          </div>
+        </div>
+        <form method="POST" action="{% url 'accounts:logout' %}">
           {% csrf_token %}
-          <button class="btn" type="submit" style="background:#ff4d4f;">로그아웃</button>
-      </form>
-  </div>
+          <button class="logout">로그아웃하기</button>
+        </form>
 
-
-<h2>저장한 장소들</h2>
-
-{% if liked_places %}
-  {% for place in liked_places %}
-    <div>
-      <h3>{{ place.name }}</h3>
-      <hr>
+        <!-- 네비탭 -->
+        <div class="bottom_nav">
+          <a href="home.html" class="nav_item">
+            <img src="{% static 'assets/img/ic_home.svg' %}" alt="ic_home_selected" />
+            <span class="unselected">홈</span>
+          </a>
+          <a href="suggestCourse.html" class="nav_item">
+            <img src="{% static 'assets/img/ic_search.svg' %}" alt="ic_search" />
+            <span class="unselected">탐험</span>
+          </a>
+          <!-- 여정 추가예정 -->
+          <a href="routeRecord.html" class="nav_item">
+            <img src="{% static 'assets/img/ic_journey.svg' %}" alt="ic_journey" />
+            <span class="unselected">여정</span>
+          </a>
+          <a href="mypage.html" class="nav_item">
+            <img src="{% static 'assets/img/ic_mypage_selected.svg' %}" alt="ic_mypage" />
+            <span class="selected">마이</span>
+          </a>
+        </div>
+      </div>
     </div>
-  {% endfor %}
-{% else %}
-  <p>아직 좋아요 누른 장소가 없습니다.</p>
-{% endif %}
-
-<br><br>
-
-    <nav>
-        <a href="{% url 'journeys:main' %}">홈</a> |
-        <a href="{% url 'journeys:explore' %}">탐험</a> |
-        <a href="{% url 'journeys:journey' %}">여정</a> |
-        <a href="{% url 'accounts:mypage' %}">마이</a>
-    </nav>
-</body>
+    <script src="{% static 'assets/js/mypage.js' %}"></script>
+  </body>
 </html>

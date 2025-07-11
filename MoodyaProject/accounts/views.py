@@ -10,6 +10,10 @@ from datetime import date
 from .forms import EmotionForm, ActivityLevelForm, RegionForm
 from .models import UserProfile
 
+
+def index(request):
+    return render(request, 'accounts/index.html')
+
 # 회원가입
 def signup(request):
     if request.method == 'POST':
@@ -121,7 +125,11 @@ def region_setup(request):
 @login_required
 def mypage(request):
     user = request.user
-    profile, _ = UserProfile.objects.get_or_create(user=user)
+
+    try:
+        profile = UserProfile.objects.get(user=user)
+    except UserProfile.DoesNotExist:
+        profile = UserProfile.objects.create(user=user)
 
     today = timezone.localdate()
     joined_day = timezone.localdate(user.date_joined)
@@ -136,3 +144,65 @@ def mypage(request):
 # next URL helper
 def get_next_url(request, fallback_name):
     return request.POST.get('next') or request.GET.get('next') or reverse(fallback_name)
+
+@login_required
+def mypage_emotion_edit(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        selected_emotion = request.POST.get('emotion')
+        if selected_emotion:
+            profile.emotion = selected_emotion
+            profile.save()
+            return redirect('accounts:mypage')  # 수정 후 마이페이지로 이동
+        else:
+            return render(request, 'accounts/mypage_emotion_edit.html', {
+                'error': '감정을 선택해 주세요.',
+            })
+
+    return render(request, 'accounts/mypage_emotion_edit.html', {
+        'profile': profile
+    })
+
+
+@login_required
+def mypage_activity_edit(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        activity_level = request.POST.get('activity')
+        if activity_level:
+            profile.activity_level = activity_level
+            profile.save()
+            return redirect('accounts:mypage')  # 수정 후 마이페이지로 이동
+        else:
+            error = "활동 수준을 선택해주세요."
+            return render(request, 'accounts/mypage_activity_edit.html', {
+                'profile': profile,
+                'error': error
+            })
+
+    return render(request, 'accounts/mypage_activity_edit.html', {
+        'profile': profile
+    })
+
+@login_required
+def mypage_region_edit(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        region = request.POST.get('region')
+        if region:
+            profile.region = region
+            profile.save()
+            return redirect('accounts:mypage')  # 수정 후 마이페이지로 이동
+        else:
+            error = "지역을 선택해주세요."
+            return render(request, 'accounts/mypage_region_edit.html', {
+                'profile': profile,
+                'error': error
+            })
+
+    return render(request, 'accounts/mypage_region_edit.html', {
+        'profile': profile
+    })

@@ -18,7 +18,7 @@
     <div id="wrap" class="container">
       <div class="box">
         <!-- 시작화면으로 이동 -->
-        <a href="../index.html" id="backBtn">
+        <a href="{% url 'accounts:index' %}" id="backBtn">
           <img src="{% static 'assets/img/backBtn.svg' %}" alt="backBtn" />
         </a>
         <div class="intro-ment">
@@ -42,7 +42,7 @@
         </form>
         <p id="goto-signup">
           아직 계정이 없으신가요?
-          <a href="signup.html" id="signup-link">회원가입하기</a>
+          <a href="{% url 'accounts:signup' %}" id="signup-link">회원가입하기</a>
         </p>
       </div>
     </div>

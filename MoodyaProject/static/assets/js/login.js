@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const checkImg = box.querySelector(".checkImage");
       if (checkImg) {
-        checkImg.src = "../assets/img/checkBtn.svg";
+        checkImg.src = "{% static 'assets/img/checkBtn.svg' %}";
       }
     });
   });

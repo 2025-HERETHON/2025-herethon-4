@@ -76,6 +76,10 @@ label {
   background: #fff;
 }
 
+#pw_input{
+  width:310px;
+}
+
 .checkBtn {
   width: 63px;
   height: 24px;
